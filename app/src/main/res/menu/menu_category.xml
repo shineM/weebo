@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/category_home"
+        android:title="@string/category_home"></item>
+    <item
+        android:id="@+id/category_special"
+        android:title="@string/category_special"></item>
+    <item
+        android:id="@+id/category_friends"
+        android:title="@string/category_friends"></item>
+</menu>

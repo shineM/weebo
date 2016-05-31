@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.danlvse.weebo.ui.WeiboDetailActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="5dp"
+        app:title="@string/weibo_detail"
+        app:titleTextColor="@color/white">
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content">
+
+        <com.danlvse.weebo.ui.widget.CustomNestScrollView
+            android:id="@+id/nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/repost_weibo_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/weibo_item_bg"
+                android:orientation="vertical">
+
+                <include layout="@layout/weibo_item_header" />
+
+                <TextView
+                    android:id="@+id/weibo_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/weibo_content_margin"
+                    android:lineSpacingExtra="3dp"
+                    android:text="@string/weibo_hint"
+                    android:textColor="@color/weibo_content_color"
+                    android:textSize="@dimen/weibo_content_size" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/image_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <LinearLayout
+                    android:id="@+id/origin_weibo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/weibo_content_margin"
+                    android:background="@color/repost_background"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/origin_weibo_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/weibo_content_margin" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/origin_weibo_image_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+
+                <com.danlvse.weebo.ui.widget.SlidingTabLayout
+                    android:id="@+id/sliding_tabs"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.5"
+                    android:background="@color/white"
+                    app:tabGravity="center"
+                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@color/colorPrimary"
+                    app:tabTextAppearance="@style/PagerTabStripText" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/comment_pager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="465dp">
+
+
+                </android.support.v4.view.ViewPager>
+            </LinearLayout>
+        </com.danlvse.weebo.ui.widget.CustomNestScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>
+

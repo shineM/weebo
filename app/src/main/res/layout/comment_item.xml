@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/weibo_header_margin_left"
+    android:orientation="horizontal">
+
+
+    <ImageView
+        android:id="@+id/commemt_user_avatar"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/weibo_avatar_margin_left"
+        android:layout_marginTop="@dimen/weibo_avatar_margin_top"
+        android:background="@drawable/avatar_background"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/commemt_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/weibo_username_margin_top"
+                android:text="@string/account_name"
+                android:textColor="@color/username_text_color"
+                android:textSize="@dimen/weibo_username_size" />
+
+
+            <TextView
+                android:id="@+id/commemt_post_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/weibo_comment_time_margin_top"
+                android:text="@string/post_time"
+                android:textSize="@dimen/weibo_time_size" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/size_between_time_device"
+                android:layout_marginTop="@dimen/size_between_time_device"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:alpha="0.5"
+                    android:src="@mipmap/ic_thumb_up_black_24dp" />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/commemt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/weibo_hint" />
+    </LinearLayout>
+
+
+</LinearLayout>

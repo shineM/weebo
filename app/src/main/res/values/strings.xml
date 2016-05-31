@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">weebo</string>
+    <string name="welcome_text_content">Welcome back,shineMicroxy</string>
+    <string name="app_name_version">Weebo v1.0.0</string>
+    <string name="open_drawer_string">open_drawer</string>
+    <string name="account_name">shineMicroxy</string>
+    <string name="category_home">首页</string>
+    <string name="category_special">特别关注</string>
+    <string name="category_friends">朋友</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_message">消息</string>
+    <string name="nav_search">发现</string>
+    <string name="nav_setting">设置</string>
+    <string name="nav_about">关于</string>
+    <string name="logout">注销</string>
+    <string name="post_time">今天,12:01 </string>
+    <string name="weibo_device">来自 墨客</string>
+    <string name="comment_count">23</string>
+    <string name="weibo_hint">Material icons are beautifully crafted, delightful, and easy to use in your web, Android, and iOS projects. Learn more about material design and our process for making these icons in the system icons section of the material design guidelines.</string>
+    <string name="weibo_detail">微博详情</string>
+    <string name="comment">评论</string>
+    <string name="remaind_add_comment">还没有评论，赶快抢沙发吧！</string>
+    <string name="remaind_add_repost">读取转发功能正在拼命开发中</string>
+    <string name="remaind_add_like">读取点赞功能正在拼命开发中</string>
+</resources>
