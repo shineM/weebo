@@ -18,6 +18,7 @@ import com.danlvse.weebo.R;
 import com.danlvse.weebo.data.Weibo;
 import com.danlvse.weebo.ui.ImagesDetailActivity;
 import com.danlvse.weebo.ui.MainActivity;
+import com.danlvse.weebo.utils.ActivityUtils;
 import com.danlvse.weebo.utils.weibo.BindViewUtil;
 
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class ImageListAdapter extends RecyclerView.Adapter {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("weibo",mWeibo);
                 intent.putExtra("bundle",bundle);
-                startShareViewActivity(intent,viewHolder.imageView);
+                ActivityUtils.startActivity(mActivity,intent,viewHolder.imageView,ImagesDetailActivity.LARGE_IMAGE);
             }
         });
     }

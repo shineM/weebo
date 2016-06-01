@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:elevation="2dp"
-    android:background="#ffffff"
-
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/weibo_item_padding"
-    android:layout_height="wrap_content">
+
+    android:background="#ffffff"
+    android:elevation="2dp">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/repost_weibo_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:transitionName="@string/transition_weibo_item">
 
         <include layout="@layout/weibo_item_header" />
 
@@ -31,9 +31,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/weibo_content_margin"
-            android:elevation="5dp"
             android:background="#f7f7f7"
-            android:orientation="vertical">
+            android:elevation="5dp"
+            android:orientation="vertical"
+            android:transitionName="@string/transition_weibo_item">
 
             <TextView
                 android:id="@+id/origin_weibo_content"

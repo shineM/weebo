@@ -35,4 +35,6 @@
     <dimen name="images_detail_like_margin_right">10dp</dimen>
     <dimen name="weibo_long_image_width">220dp</dimen>
     <dimen name="weibo_long_image_height">170dp</dimen>
+    <dimen name="add_weibo_username_margin_top">15dp</dimen>
+    <dimen name="profile_page_username_margin_top">30dp</dimen>
 </resources>

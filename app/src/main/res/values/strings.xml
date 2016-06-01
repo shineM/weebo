@@ -20,6 +20,16 @@
     <string name="weibo_detail">微博详情</string>
     <string name="comment">评论</string>
     <string name="remaind_add_comment">还没有评论，赶快抢沙发吧！</string>
-    <string name="remaind_add_repost">读取转发功能正在拼命开发中</string>
-    <string name="remaind_add_like">读取点赞功能正在拼命开发中</string>
+    <string name="remaind_add_repost">该功能正在拼命开发中</string>
+    <string name="remaind_add_like">该功能正在拼命开发中</string>
+    <string name="post_weibo">发布</string>
+    <string name="recyclerview_header">嘿嘿嘿...</string>
+    <string name="about_athour">shineMicroxy</string>
+    <string name="follower_count">  粉丝  78</string>
+    <string name="profile_sign">还没有填写您的个人介绍呢</string>
+    <string name="about_contact">正在开发中...</string>
+    <string name="transiton_avatar">transition_bettween_avatar</string>
+    <string name="transition_weibo_item">weibo item transition</string>
+    <string name="transition_weibo_origin_item">origin_transition</string>
+    <string name="follow_count">关注  78  </string>
 </resources>

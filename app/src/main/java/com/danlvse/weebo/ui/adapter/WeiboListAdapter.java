@@ -65,13 +65,13 @@ public class WeiboListAdapter extends RecyclerView.Adapter {
         //原创微博
         if (holder instanceof WeiboViewHolder) {
             WeiboViewHolder viewHolder = (WeiboViewHolder) holder;
-            BindViewUtil.bindHeaderInf(viewHolder.avatar, viewHolder.username, viewHolder.postTime, viewHolder.postDevice, viewHolder.repostCount, viewHolder.commentCount, viewHolder.likeCount, mContext, weibo);
-            BindViewUtil.bindContent(viewHolder.content, mContext, weibo.text, new OnWeiboContentListener() {
-                @Override
-                public void onTextClick() {
-                    viewDetail(weibo);
-                }
-            });
+//            BindViewUtil.bindHeaderInf(viewHolder.avatar, viewHolder.username, viewHolder.postTime, viewHolder.postDevice, viewHolder.repostCount, viewHolder.commentCount, viewHolder.likeCount, mContext, weibo);
+//            BindViewUtil.bindContent(viewHolder.content, mA, weibo.text, new OnWeiboContentListener() {
+//                @Override
+//                public void onTextClick() {
+//                    viewDetail(weibo);
+//                }
+//            });
 //            BindViewUtil.bindImages(mContext, viewHolder.imgList, weibo.origin_pic_urls);
 //            viewHolder.weibo.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -83,13 +83,13 @@ public class WeiboListAdapter extends RecyclerView.Adapter {
         } else if (holder instanceof RepostWeiboViewHolder) {
             RepostWeiboViewHolder viewHolder = (RepostWeiboViewHolder) holder;
             //绑定转发内容
-            BindViewUtil.bindHeaderInf(viewHolder.avatar, viewHolder.username, viewHolder.postTime, viewHolder.postDevice, viewHolder.repostCount, viewHolder.commentCount, viewHolder.likeCount, mContext, weibo);
-            BindViewUtil.bindContent(viewHolder.content, mContext, weibo.text, new OnWeiboContentListener() {
-                @Override
-                public void onTextClick() {
-                    viewDetail(weibo);
-                }
-            });
+//            BindViewUtil.bindHeaderInf(viewHolder.avatar, viewHolder.username, viewHolder.postTime, viewHolder.postDevice, viewHolder.repostCount, viewHolder.commentCount, viewHolder.likeCount, mContext, weibo);
+//            BindViewUtil.bindContent(viewHolder.content, mContext, weibo.text, new OnWeiboContentListener() {
+//                @Override
+//                public void onTextClick() {
+//                    viewDetail(weibo);
+//                }
+//            });
             String originContent = null;
             if (weibo.retweeted_status.user != null) {
                 originContent = "@" + weibo.retweeted_status.user.name + " : " + weibo.retweeted_status.text;
@@ -97,12 +97,12 @@ public class WeiboListAdapter extends RecyclerView.Adapter {
                 originContent = "抱歉，此微博已被作者删除。";
             }
             //绑定原微博内容
-            BindViewUtil.bindContent(viewHolder.originContent, mContext, originContent, new OnWeiboContentListener() {
-                @Override
-                public void onTextClick() {
-                    viewDetail(weibo.retweeted_status);
-                }
-            });
+//            BindViewUtil.bindContent(viewHolder.originContent, mContext, originContent, new OnWeiboContentListener() {
+//                @Override
+//                public void onTextClick() {
+//                    viewDetail(weibo.retweeted_status);
+//                }
+//            });
 //            BindViewUtil.bindImages(mContext, viewHolder.imgList, weibo.retweeted_status.origin_pic_urls);
             viewHolder.originWeibo.setOnClickListener(new View.OnClickListener() {
                 @Override

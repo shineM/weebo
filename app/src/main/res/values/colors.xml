@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#4188c9</color>
     <color name="colorAccent">#FF4081</color>
     <color name="welcome_text_color">#eeeeee</color>
     <color name="welcome_page_bgcolor">#5e8756</color>
@@ -15,4 +15,5 @@
     <color name="tab_background">#ffffff</color>
     <color name="avatar_background">#c7c9ff</color>
     <color name="image_background">#dfdfdf</color>
+    <color name="text_white">#ffffff</color>
 </resources>

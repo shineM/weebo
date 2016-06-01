@@ -39,24 +39,31 @@
                 android:background="@drawable/weibo_item_bg"
                 android:orientation="vertical">
 
-                <include layout="@layout/weibo_item_header" />
+               <LinearLayout
+                   android:transitionName="@string/transition_weibo_item"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+                   <include layout="@layout/weibo_item_header" />
 
-                <TextView
-                    android:id="@+id/weibo_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/weibo_content_margin"
-                    android:lineSpacingExtra="3dp"
-                    android:text="@string/weibo_hint"
-                    android:textColor="@color/weibo_content_color"
-                    android:textSize="@dimen/weibo_content_size" />
+                   <TextView
+                       android:id="@+id/weibo_content"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="@dimen/weibo_content_margin"
+                       android:lineSpacingExtra="3dp"
+                       android:text="@string/weibo_hint"
+                       android:textColor="@color/weibo_content_color"
+                       android:textSize="@dimen/weibo_content_size" />
+                   <android.support.v7.widget.RecyclerView
+                       android:id="@+id/image_list"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/image_list"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                   </android.support.v7.widget.RecyclerView>
+               </LinearLayout>
 
-                </android.support.v7.widget.RecyclerView>
+
 
                 <LinearLayout
                     android:id="@+id/origin_weibo"

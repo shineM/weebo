@@ -8,6 +8,7 @@
 
     <LinearLayout
         android:id="@+id/weibo_item"
+        android:transitionName="@string/transition_weibo_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 

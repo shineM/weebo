@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -24,13 +25,14 @@ import com.danlvse.weebo.ui.fragment.CommentFragment;
 import com.danlvse.weebo.ui.fragment.LikeFragment;
 import com.danlvse.weebo.ui.fragment.RepostFragment;
 import com.danlvse.weebo.ui.widget.SlidingTabLayout;
+import com.danlvse.weebo.utils.OnKeyClick;
 import com.danlvse.weebo.utils.OnWeiboContentListener;
 import com.danlvse.weebo.utils.weibo.BindViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeiboDetailActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
+public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private SwipeRefreshLayout mRefreshLayout;
 
     private Weibo mWeibo;
@@ -136,22 +138,42 @@ public class WeiboDetailActivity extends BaseActivity implements ViewPager.OnPag
             imgList = (RecyclerView) findViewById(R.id.image_list);
 
             originWeiboItem.setVisibility(View.GONE);
-            BindViewUtil.bindHeaderInf(avatar, username, postTime, postDevice, repostCount, commentCount, likeCount, mContext, mWeibo);
+            BindViewUtil.bindHeaderInf(avatar, username, postTime, postDevice, repostCount, commentCount, likeCount, this, mWeibo);
             BindViewUtil.bindContent(content, mContext, mWeibo.text, new OnWeiboContentListener() {
                 @Override
                 public void onTextClick() {
                     return;
+                }
+            }, new OnKeyClick() {
+                @Override
+                public void onUsernameClick(String s) {
+
+                }
+
+                @Override
+                public void onTopicClick(String s) {
+
                 }
             });
             BindViewUtil.bindImages(this, imgList, mWeibo);
 
 
         } else {
-            BindViewUtil.bindHeaderInf(avatar, username, postTime, postDevice, repostCount, commentCount, likeCount, mContext, mWeibo);
+            BindViewUtil.bindHeaderInf(avatar, username, postTime, postDevice, repostCount, commentCount, likeCount, this, mWeibo);
             BindViewUtil.bindContent(content, mContext, mWeibo.text, new OnWeiboContentListener() {
                 @Override
                 public void onTextClick() {
                     return;
+                }
+            }, new OnKeyClick() {
+                @Override
+                public void onUsernameClick(String s) {
+
+                }
+
+                @Override
+                public void onTopicClick(String s) {
+
                 }
             });
             String originContent = null;
@@ -169,6 +191,16 @@ public class WeiboDetailActivity extends BaseActivity implements ViewPager.OnPag
                     intent.putExtra("weibo", (Parcelable) mWeibo.retweeted_status);
                     mContext.startActivity(intent);
                 }
+            }, new OnKeyClick() {
+                @Override
+                public void onUsernameClick(String s) {
+
+                }
+
+                @Override
+                public void onTopicClick(String s) {
+
+                }
             });
             BindViewUtil.bindImages(this, imgList, mWeibo.retweeted_status);
             originWeiboItem.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +215,7 @@ public class WeiboDetailActivity extends BaseActivity implements ViewPager.OnPag
 
     }
 
-    @Override
+
     protected void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);

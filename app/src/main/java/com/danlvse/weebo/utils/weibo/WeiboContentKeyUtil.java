@@ -7,13 +7,13 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.danlvse.weebo.ui.widget.ContentClickableSpan;
 import com.danlvse.weebo.ui.widget.WeiboContentClickableSpan;
+import com.danlvse.weebo.utils.OnKeyClick;
 import com.danlvse.weebo.utils.OnWeiboContentListener;
 
 import java.util.regex.Matcher;
@@ -30,7 +30,7 @@ public class WeiboContentKeyUtil {
     private static final String ALL = "(@[\u4e00-\u9fa5\\w_-]{2,30})|(#[\u4e00-\u9fa5\\w]+#)|(http://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])";
 
     //微博正文字符串解析
-    public static SpannableString getWeiBoContent(final String source, final Context context, TextView textView, final OnWeiboContentListener listener) {
+    public static SpannableString getWeiBoContent(final String source, final Context context, TextView textView, final OnWeiboContentListener listener, final OnKeyClick onKeyClick) {
         SpannableString spannableString = new SpannableString(source);
         //设置正则
         Pattern pattern = Pattern.compile(ALL);
@@ -57,7 +57,7 @@ public class WeiboContentKeyUtil {
                 WeiboContentClickableSpan myClickableSpan = new WeiboContentClickableSpan(context) {
                     @Override
                     public void onClick(View widget) {
-                        Toast.makeText(context, "点击了用户：" + s, Toast.LENGTH_SHORT).show();
+                        onKeyClick.onUsernameClick(s.toString());
                     }
                 };
                 spannableString.setSpan(myClickableSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -66,7 +66,7 @@ public class WeiboContentKeyUtil {
                 WeiboContentClickableSpan myClickableSpan = new WeiboContentClickableSpan(context) {
                     @Override
                     public void onClick(View widget) {
-                        Toast.makeText(context, "点击了话题：" + s, Toast.LENGTH_SHORT).show();
+                        onKeyClick.onTopicClick(s.toString());
                     }
                 };
                 spannableString.setSpan(myClickableSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -154,7 +154,8 @@ public class WeiboContentKeyUtil {
 
                     @Override
                     public void onClick(View widget) {
-                        Toast.makeText(context, "点击了网址：" + url, Toast.LENGTH_LONG).show();
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url.toString()));
+                        context.startActivity(browserIntent);
                     }
                 };
                 spannableString.setSpan(clickableSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

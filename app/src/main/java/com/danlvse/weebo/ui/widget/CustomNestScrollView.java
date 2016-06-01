@@ -49,7 +49,7 @@ public class CustomNestScrollView extends NestedScrollView {
                 location = new int[2];
 
             viewGroup = (ViewGroup) this.getChildAt(0);
-            viewGroup.getChildAt(4).getLocationOnScreen(location);
+            viewGroup.getChildAt(2).getLocationOnScreen(location);
             if (location[1] > getResources().getDimension(R.dimen.tab_to_top_size)) {
                 return true;
             }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context="com.danlvse.weebo.ui.AddWeiboActivity"
+    >
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/add_weibo_background"
+        android:elevation="22dp"
+        android:orientation="vertical"
+        android:transitionName="map_transition">
+        <include layout="@layout/add_weibo_header_info"></include>
+
+
+        <EditText
+            android:id="@+id/idea_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="top"
+            android:hint="分享新鲜事..."
+            android:minHeight="100dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="31dp"
+            android:paddingTop="5dp"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</FrameLayout>

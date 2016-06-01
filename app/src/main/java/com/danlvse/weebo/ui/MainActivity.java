@@ -1,5 +1,6 @@
 package com.danlvse.weebo.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -32,6 +34,7 @@ import com.danlvse.weebo.presenter.MainActivityPresenter;
 import com.danlvse.weebo.presenter.imp.MainActivityPresenterImp;
 import com.danlvse.weebo.ui.adapter.TimelineAdapter;
 import com.danlvse.weebo.ui.adapter.WeiboListAdapter;
+import com.danlvse.weebo.utils.ActivityUtils;
 import com.danlvse.weebo.utils.ToastUtil;
 import com.danlvse.weebo.utils.weibo.AccessTokenKeeper;
 import com.danlvse.weebo.ui.view.MainActivityView;
@@ -61,6 +64,8 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
     private MainActivityPresenter mMainActivityPresenter;
     private Context mContext;
     private FloatingActionButton mFab;
+    private ImageView headerAvatar;
+    private Activity mActivity;
 
 
     @Override
@@ -68,6 +73,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
+        mActivity = this;
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         mRecyclerView = (RecyclerView) findViewById(R.id.weibo_timeline);
         mMainActivityPresenter = new MainActivityPresenterImp(this);
@@ -90,6 +96,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
             @Override
             public void onClick(View v) {
                 mRecyclerView.scrollToPosition(0);
+                mFab.setVisibility(View.GONE);
             }
         });
     }
@@ -116,7 +123,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
         mRecyclerView.setAdapter(newAdapter);
 
     }
-    
+
 
     @Override
     protected void initToolbar() {
@@ -134,6 +141,23 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
                 popupCategoryWindow(v);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_toolbar, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()==R.id.new_weibo){
+            Intent intent = new Intent(MainActivity.this,AddWeiboActivity.class);
+
+            startActivity(intent);
+        }
+        return true;
     }
 
     //弹出微博分类菜单
@@ -204,23 +228,24 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open_drawer_string, R.string.open_drawer_string);
         mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
-        View headerView = mNav.getHeaderView(0);
+        final View headerView = mNav.getHeaderView(0);
         profileView = headerView.findViewById(R.id.profile_view);
+        headerAvatar = (ImageView) headerView.findViewById(R.id.drawer_header_avatar);
         profileView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
-                delayStartActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                delayStartActivity(mActivity,new Intent(MainActivity.this, ProfileActivity.class),headerView,mContext.getResources().getString(R.string.transiton_avatar));
             }
         });
     }
 
     //侧滑栏延时跳转
-    private void delayStartActivity(final Intent intent) {
+    private void delayStartActivity(final Activity activity, final Intent intent,final View view, final String transition) {
         mHander.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(intent);
+                ActivityUtils.startActivity(activity,intent,view,transition);
 
             }
         }, 300);
@@ -291,7 +316,6 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
     @Override
     public void showErrorInfo(String error) {
         ToastUtil.showShort(mContext, "亲，访问出错啦啦！");
-
     }
 
     //Recyclerview Adapter回调接口方法

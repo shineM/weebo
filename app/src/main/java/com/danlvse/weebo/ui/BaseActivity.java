@@ -26,7 +26,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void initViewStyle() {
         Window mWindow = getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mWindow.setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
+            mWindow.setFlags(
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
 
