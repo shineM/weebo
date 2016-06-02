@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196f3</color>
-    <color name="colorPrimaryDark">#4188c9</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#819fb9</color>
+    <color name="colorPrimaryDark">#819fb9</color>
+    <color name="colorAccent">#f06292</color>
     <color name="welcome_text_color">#eeeeee</color>
     <color name="welcome_page_bgcolor">#5e8756</color>
     <color name="welcome_appname_color">#836e4b</color>
@@ -16,4 +16,7 @@
     <color name="avatar_background">#c7c9ff</color>
     <color name="image_background">#dfdfdf</color>
     <color name="text_white">#ffffff</color>
+    <color name="scrim">#99323232</color>
+    <color name="icon_grey">#696969</color>
+    <color name="cancel_button_bg">#95aba6</color>
 </resources>

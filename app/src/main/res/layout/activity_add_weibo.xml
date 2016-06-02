@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context="com.danlvse.weebo.ui.AddWeiboActivity"
-    >
+    tools:context="com.danlvse.weebo.ui.AddWeiboActivity">
 
-    <LinearLayout
+    <View
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/add_weibo_background"></View>
+
+    <LinearLayout
+        android:id="@+id/add_window"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@drawable/add_weibo_background"
+        android:layout_marginBottom="1dp"
+        android:background="@color/transparent"
         android:elevation="22dp"
         android:orientation="vertical"
         android:transitionName="map_transition">
+
         <include layout="@layout/add_weibo_header_info"></include>
 
 
         <EditText
-            android:id="@+id/idea_content"
+            android:id="@+id/add_content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@color/transparent"
             android:gravity="top"
             android:hint="分享新鲜事..."
             android:minHeight="100dp"
@@ -34,6 +41,67 @@
             android:paddingTop="5dp"
             android:textSize="15sp" />
 
+        <FrameLayout
+
+            android:id="@+id/image_container"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/selected_picture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/cancel_button"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right|top"
+                android:background="@drawable/cancel_button_bg"
+                android:src="@mipmap/ic_cancel_white_24dp"
+                android:visibility="invisible" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#ececec"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/add_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:drawableStart="@drawable/vector_drawable_ic_location_on_black___px"
+                android:text="  添加位置"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/add_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:drawableStart="@drawable/vector_drawable_ic_photo_library_black___px"
+                android:text="  添加照片"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+
     </LinearLayout>
+
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/loading_progress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical"
+        android:visibility="invisible"
+        app:matProg_barColor="@color/colorAccent"
+        app:matProg_progressIndeterminate="true" />
 
 </FrameLayout>

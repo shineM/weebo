@@ -6,14 +6,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
     android:orientation="vertical"
     tools:context="com.danlvse.weebo.ui.WeiboDetailActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
+
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="22dp"
         android:background="@color/colorPrimary"
         android:elevation="5dp"
         app:title="@string/weibo_detail"
@@ -39,30 +41,31 @@
                 android:background="@drawable/weibo_item_bg"
                 android:orientation="vertical">
 
-               <LinearLayout
-                   android:transitionName="@string/transition_weibo_item"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical">
-                   <include layout="@layout/weibo_item_header" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:transitionName="@string/transition_weibo_item">
 
-                   <TextView
-                       android:id="@+id/weibo_content"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:layout_margin="@dimen/weibo_content_margin"
-                       android:lineSpacingExtra="3dp"
-                       android:text="@string/weibo_hint"
-                       android:textColor="@color/weibo_content_color"
-                       android:textSize="@dimen/weibo_content_size" />
-                   <android.support.v7.widget.RecyclerView
-                       android:id="@+id/image_list"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content">
+                    <include layout="@layout/weibo_item_header" />
 
-                   </android.support.v7.widget.RecyclerView>
-               </LinearLayout>
+                    <TextView
+                        android:id="@+id/weibo_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/weibo_content_margin"
+                        android:lineSpacingExtra="3dp"
+                        android:text="@string/weibo_hint"
+                        android:textColor="@color/weibo_content_color"
+                        android:textSize="@dimen/weibo_content_size" />
 
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/image_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
 
 
                 <LinearLayout

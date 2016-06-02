@@ -8,5 +8,11 @@
 
         android:title="写微博"
         app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/hot"
+        android:icon="@mipmap/ic_whatshot_white_24dp"
+        android:orderInCategory="70"
 
+        android:title="热门"
+        app:showAsAction="ifRoom"></item>
 </menu>

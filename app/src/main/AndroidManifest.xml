@@ -10,41 +10,54 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
-        android:screenOrientation="portrait"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.WelcomeActivity">
+        <activity
+            android:name=".ui.WelcomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.WebViewActivity" />
+        <activity android:name=".ui.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.WebViewActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.ProfileActivity"
-            android:parentActivityName=".ui.MainActivity" />
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 登录web界面 -->
         <activity
             android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
-            android:configChanges="keyboardHidden|orientation" />
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sina.weibo.sdk.register.mobile.MobileRegisterActivity"
-            android:configChanges="keyboardHidden|orientation" />
-
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
         <!-- 注册选择国家页面 -->
         <activity
             android:name="com.sina.weibo.sdk.register.mobile.SelectCountryActivity"
-            android:configChanges="keyboardHidden|orientation" />
-        <activity android:name=".ui.WeiboDetailActivity" />
-        <activity android:name=".ui.ImagesDetailActivity" />
-        <activity android:name=".ui.AddWeiboActivity"
-            android:theme="@style/TransparentActivity"></activity>
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.WeiboDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ImagesDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.AddWeiboActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

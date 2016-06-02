@@ -14,7 +14,7 @@
     <dimen name="category_text_width">85dp</dimen>
     <dimen name="weibo_username_margin_left">55dp</dimen>
     <dimen name="weibo_time_margin_top">35dp</dimen>
-    <dimen name="weibo_username_size">14sp</dimen>
+    <dimen name="weibo_username_size">15sp</dimen>
     <dimen name="weibo_time_size">10sp</dimen>
     <dimen name="weibo_username_margin_top">5dp</dimen>
     <dimen name="weibo_from_device_margin_left">110dp</dimen>
@@ -35,6 +35,7 @@
     <dimen name="images_detail_like_margin_right">10dp</dimen>
     <dimen name="weibo_long_image_width">220dp</dimen>
     <dimen name="weibo_long_image_height">170dp</dimen>
-    <dimen name="add_weibo_username_margin_top">15dp</dimen>
+    <dimen name="add_weibo_username_margin_top">10dp</dimen>
     <dimen name="profile_page_username_margin_top">30dp</dimen>
+    <dimen name="icon_size_normal">20dp</dimen>
 </resources>

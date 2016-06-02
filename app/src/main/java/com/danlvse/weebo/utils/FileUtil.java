@@ -1,9 +1,13 @@
 package com.danlvse.weebo.utils;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.StatFs;
+import android.provider.MediaStore;
 
 import com.danlvse.weebo.data.Weibo;
 
@@ -16,7 +20,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -88,7 +94,33 @@ public class FileUtil {
     public static String getRootDirectoryPath(Context context) {
         return Environment.getRootDirectory().getAbsolutePath();
     }
+    private static String getImageDirPath() {
+        String path = getSDCardPath();
+        File file = new File(path+"/weebo/photos");
+        if (!file.exists()) {
+          if (file.mkdir()){
+              System.out.println(path+"/weebo/photos");
+          }
+        }
+        return path+"/weebo/photos";
+    }
 
+    public static File createFileByDate() {
+
+        String fileName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())+".jpg";
+
+        File file = new File(getImageDirPath(), fileName);
+        return file;
+    }
+    //根据Intent Uri得到图片路径
+    public static String getPath(Uri uri, Activity activity) {
+        String[] projection = {MediaStore.MediaColumns.DATA};
+        Cursor cursor = activity
+                .managedQuery(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
     public static void put(Context context, String fileDir, String fileName, String content) {
         File filedir = new File(fileDir);
         File jsonfile = new File(filedir, fileName);

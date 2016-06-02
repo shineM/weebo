@@ -5,19 +5,22 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
     tools:openDrawer="start">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="22dp"
+
         android:orientation="vertical">
 
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="@dimen/toolbar_height"
             android:background="@color/colorPrimary"
             android:elevation="@dimen/toolbar_elevation"
             android:titleTextColor="@color/white"
@@ -68,7 +71,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:layout_margin="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="55dp"
+
             android:clickable="true"
             android:elevation="4dp"
             android:src="@mipmap/ic_keyboard_arrow_up_white_24dp"

@@ -30,13 +30,14 @@ import com.danlvse.weebo.presenter.imp.ProfilePresenterImp;
 import com.danlvse.weebo.ui.view.ProfileView;
 import com.danlvse.weebo.utils.ToastUtil;
 import com.danlvse.weebo.utils.weibo.AccessTokenKeeper;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by zxy on 16/5/25.
  */
-public class ProfileActivity extends BaseActivity implements ProfileView{
+public class ProfileActivity extends BaseActivity implements ProfileView {
 
     private Context context;
     private Toolbar toolbar;
@@ -48,6 +49,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
     private ImageView background;
     private ProfilePresenter profilePresenter;
     private String username;
+    private ProgressWheel progressWheel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,14 +60,31 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         profilePresenter = new ProfilePresenterImp(this);
         String s = getIntent().getStringExtra("user");
         User user = getIntent().getParcelableExtra("users");
-        if (!TextUtils.isEmpty(s)){
+        if (!TextUtils.isEmpty(s)) {
             username = s.substring(1);
-            profilePresenter.getUser(this,username);
+            profilePresenter.getUser(this, username);
             collapsingToolbarLayout.setTitle(username);
-        }else if (user!=null){
+        } else if (user != null) {
             bindProfile(user);
+            hideLoadingIcon();
             collapsingToolbarLayout.setTitle(user.name);
         }
+        initMaterialStyle();
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.profile_page_username_size);
+        collapsingToolbarLayout.setExpandedTitleGravity(Gravity.CENTER_HORIZONTAL);
+        collapsingToolbarLayout.setExpandedTitleMarginTop((int) getResources().getDimension(R.dimen.profile_page_username_margin_top));
+
+    }
+
+    private void initMaterialStyle() {
         Window window = getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             window.setFlags(
@@ -83,18 +102,12 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.profile_page_username_size);
-        collapsingToolbarLayout.setExpandedTitleGravity(Gravity.CENTER_HORIZONTAL);
-        collapsingToolbarLayout.setExpandedTitleMarginTop((int)getResources().getDimension(R.dimen.profile_page_username_margin_top));
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setBackgroundDrawableResource(R.drawable.add_weibo_background);
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
     }
 
     private void bindView() {
@@ -105,6 +118,8 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         followerCount = (TextView) findViewById(R.id.profile_follower_count_count);
         sign = (TextView) findViewById(R.id.profile_sign);
         background = (ImageView) findViewById(R.id.profile_user_background);
+        progressWheel = (ProgressWheel) findViewById(R.id.loading_progress);
+
     }
 
     @Override
@@ -115,14 +130,28 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
     @Override
     public void bindProfile(User user) {
         Glide.with(this).load(user.avatar_large).placeholder(R.mipmap.ic_person_white_24dp).bitmapTransform(new CropCircleTransformation(this)).into(avatar);
-        followerCount.setText("粉丝  "+user.followers_count+"");
-        followCount.setText("关注  "+user.friends_count);
+        followerCount.setText("粉丝  " + user.followers_count + "");
+        followCount.setText("关注  " + user.friends_count);
         sign.setText(user.description);
 
     }
 
     @Override
     public void showErrorInfo() {
-        ToastUtil.showShort(this,"访问出错啦，请重试");
+        ToastUtil.showShort(this, "访问出错啦，请重试");
+    }
+
+    @Override
+    public void showLoadingIcon() {
+        if (progressWheel.getVisibility() != View.VISIBLE) {
+            progressWheel.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void hideLoadingIcon() {
+        if (progressWheel.getVisibility() == View.VISIBLE) {
+            progressWheel.setVisibility(View.GONE);
+        }
     }
 }

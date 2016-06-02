@@ -115,11 +115,22 @@ public class SearchAPI extends AbsOpenAPI {
      * @param count     返回的记录条数，默认为10
      * @param listener  异步请求回调接口
      */
-    public void apps(String q, int count, RequestListener listener) {
-        WeiboParameters params = buildBaseParams(q, count);
+    public void apps(String q, int count, int page,RequestListener listener) {
+        WeiboParameters params = buildBaseParams(q, count,page);
         requestAsync(SERVER_URL_PRIX + "/suggestions/apps.json", params, HTTPMETHOD_GET, listener);
     }
 
+    /**
+     * 搜索##搜索建议。
+     *
+     * @param q         搜索的关键字，必须做URLencoding
+     * @param count     返回的记录条数，默认为10
+     * @param listener  异步请求回调接口
+     */
+    public void topic(String q, int count, RequestListener listener) {
+        WeiboParameters params = buildBaseParams(q, count);
+        requestAsync(SERVER_URL_PRIX + "/topics.json", params, HTTPMETHOD_GET, listener);
+    }
     /**
      * “@”用户时的联想建议。
      * 
@@ -147,6 +158,13 @@ public class SearchAPI extends AbsOpenAPI {
         WeiboParameters params = new WeiboParameters(mAppKey);
         params.put("q", q);
         params.put("count", count);
+        return params;
+    }
+    private WeiboParameters buildBaseParams(String q, int count,int page) {
+        WeiboParameters params = new WeiboParameters(mAppKey);
+        params.put("q", q);
+        params.put("count", count);
+        params.put("page",page);
         return params;
     }
 }

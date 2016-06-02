@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
+    android:clipToPadding="false"
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
@@ -49,7 +50,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="195dp"
+                    android:layout_marginTop="185dp"
+                    android:textAlignment="center"
                     android:text="@string/profile_sign"
                     android:textColor="@color/text_white"
                     android:textSize="13dp" />
@@ -101,55 +103,66 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="8dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp"
-                android:text="个人介绍"
-                android:textColor="#757575"
-                android:textSize="15dp" />
+                android:orientation="vertical"
+                android:padding="8dp">
+                <com.pnikosis.materialishprogress.ProgressWheel
+                    android:id="@+id/loading_progress"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    app:matProg_barColor="@color/colorAccent"
+                    app:matProg_progressIndeterminate="true"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:text="个人介绍"
+                    android:textColor="#757575"
+                    android:textSize="15dp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/weibo_item_bg"
-                android:padding="16dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/weibo_item_bg"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_sign" />
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/profile_sign" />
-            </RelativeLayout>
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:text="最近动态"
+                    android:textColor="#757575"
+                    android:textSize="15dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:text="最近动态"
-                android:textColor="#757575"
-                android:textSize="15dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/weibo_item_bg"
-                android:padding="16dp">
-
-                <TextView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autoLink="web"
-                    android:saveEnabled="true"
-                    android:text="@string/about_contact" />
-            </RelativeLayout>
-        </LinearLayout>
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/weibo_item_bg"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoLink="web"
+                        android:saveEnabled="true"
+                        android:text="@string/about_contact" />
+                </RelativeLayout>
+            </LinearLayout>
+
+
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

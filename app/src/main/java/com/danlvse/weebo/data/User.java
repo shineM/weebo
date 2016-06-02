@@ -24,13 +24,15 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  *  Created by zxy on 16/5/25
  *
  * @author SINA
  * @since 2013-11-24
  */
-public class User implements Parcelable {
+public class User implements Parcelable ,Serializable{
 
     /**
      * 用户UID（int64）

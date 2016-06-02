@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -51,7 +52,7 @@ public class BindViewUtil {
             public void onClick(View v) {
                 //TODO add shareElements transition
                 Intent intent = new Intent(activity, ProfileActivity.class);
-                intent.putExtra("users",weibo.user);
+                intent.putExtra("users",(Parcelable) weibo.user);
                 activity.startActivity(intent);
             }
         });
@@ -61,7 +62,7 @@ public class BindViewUtil {
             public void onClick(View v) {
                 //TODO add shareElements transition
                 Intent intent = new Intent(activity, ProfileActivity.class);
-                intent.putExtra("users",weibo.user);
+                intent.putExtra("users",(Parcelable) weibo.user);
                 activity.startActivity(intent);
             }
         });

@@ -8,4 +8,6 @@ import com.danlvse.weebo.data.User;
 public interface ProfileView {
     void bindProfile(User user);
     void showErrorInfo();
+    void showLoadingIcon();
+    void hideLoadingIcon();
 }

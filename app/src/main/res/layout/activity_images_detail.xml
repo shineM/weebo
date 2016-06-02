@@ -6,15 +6,20 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:fitsSystemWindows="true"
-    android:transitionName="large image"
+
     tools:context="com.danlvse.weebo.ui.ImagesDetailActivity">
 
-    <uk.co.senab.photoview.PhotoView
-        android:id="@+id/image_detail"
+    <RelativeLayout
+        android:transitionName="large image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent">
+        <uk.co.senab.photoview.PhotoView
+            android:id="@+id/image_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
-        android:layout_centerVertical="true" />
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

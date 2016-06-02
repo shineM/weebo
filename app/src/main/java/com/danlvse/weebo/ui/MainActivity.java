@@ -198,6 +198,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
 
     //初始化侧滑栏
     private void initDrawer() {
+
         mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -238,6 +239,9 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
                 delayStartActivity(mActivity,new Intent(MainActivity.this, ProfileActivity.class),headerView,mContext.getResources().getString(R.string.transiton_avatar));
             }
         });
+        mDrawerLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
     }
 
     //侧滑栏延时跳转
@@ -245,7 +249,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
         mHander.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ActivityUtils.startActivity(activity,intent,view,transition);
+                startActivity(intent);
 
             }
         }, 300);

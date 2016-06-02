@@ -2,6 +2,7 @@ package com.danlvse.weebo.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerTabStrip;
@@ -121,7 +122,7 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
         mTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         mTabLayout.setDistributeEvenly(true);
         mTabLayout.setViewPager(commentPager);
-        mRefreshLayout.scrollTo(0,0);
+        mRefreshLayout.scrollTo(0, 0);
     }
 
     private void initWeiboData() {
@@ -217,6 +218,13 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
 
 
     protected void initToolbar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setBackgroundDrawableResource(R.drawable.add_weibo_background);
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mToolbar.setTitle(R.string.weibo_detail);

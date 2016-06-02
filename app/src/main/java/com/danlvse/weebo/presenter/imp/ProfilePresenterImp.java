@@ -15,14 +15,17 @@ public class ProfilePresenterImp implements ProfilePresenter {
     private ProfileView profileView;
     private ProfileModel profileModel;
     private ProfileModel.OnDataFinished listener = new ProfileModel.OnDataFinished() {
+
         @Override
         public void onComplete(User user) {
             profileView.bindProfile(user);
+            profileView.hideLoadingIcon();
         }
 
         @Override
         public void onError(String s) {
             profileView.showErrorInfo();
+            profileView.hideLoadingIcon();
         }
     };
 
@@ -33,6 +36,7 @@ public class ProfilePresenterImp implements ProfilePresenter {
 
     @Override
     public void getUser(Context context, String username) {
+        profileView.showLoadingIcon();
         profileModel.getUser(context,username,listener);
     }
 
