@@ -67,7 +67,6 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
     private ImageView headerAvatar;
     private Activity mActivity;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +112,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
 
     private void initRecyclerView() {
         mWeibos = new ArrayList<Weibo>();
-        mAapter = new WeiboListAdapter(mWeibos, this);
+//        mAapter = new WeiboListAdapter(mWeibos, this);
         newAdapter = new TimelineAdapter(this, mWeibos);
         newAdapter.setOnLoadMoreListener(this);
         newAdapter.openLoadMore(4, true);
@@ -154,7 +153,9 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId()==R.id.new_weibo){
             Intent intent = new Intent(MainActivity.this,AddWeiboActivity.class);
-
+            startActivity(intent);
+        }else if (item.getItemId()==R.id.hot){
+            Intent intent = new Intent(MainActivity.this,TrendsActivity.class);
             startActivity(intent);
         }
         return true;
@@ -236,7 +237,9 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
             @Override
             public void onClick(View v) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
-                delayStartActivity(mActivity,new Intent(MainActivity.this, ProfileActivity.class),headerView,mContext.getResources().getString(R.string.transiton_avatar));
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                intent.putExtra("user","@shineMicroxy");
+                delayStartActivity(mActivity,intent,headerView,mContext.getResources().getString(R.string.transiton_avatar));
             }
         });
         mDrawerLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE

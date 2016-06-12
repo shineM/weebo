@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -109,7 +110,6 @@ public class ImagesDetailActivity extends AppCompatActivity {
         @Override
         public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
             mProgressIcon.setVisibility(View.GONE);
-            System.out.println("url------" + url);
             return false;
         }
     };
@@ -127,7 +127,6 @@ public class ImagesDetailActivity extends AppCompatActivity {
                 @Override
                 public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
                     mProgressIcon.setVisibility(View.GONE);
-                    System.out.println("url------" + url);
                     return false;
                 }
             }).into(mImage);
@@ -137,7 +136,6 @@ public class ImagesDetailActivity extends AppCompatActivity {
         @Override
         public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
             mProgressIcon.setVisibility(View.GONE);
-            System.out.println("url------" + url);
             return false;
         }
     };
@@ -147,7 +145,7 @@ public class ImagesDetailActivity extends AppCompatActivity {
         mImage = (ImageView) findViewById(R.id.image_detail);
         url = url.replace("/bmiddle/", "/large/");
         if (url.endsWith(".gif")){
-            Glide.with(this).load(url).asGif().listener(gifListener).into(mImage);
+            Glide.with(this).load(url).asGif().diskCacheStrategy(DiskCacheStrategy.NONE).listener(gifListener).into(mImage);
         }else{
             Glide.with(this).load(url).asBitmap().fitCenter().listener(listener).into(mImage);
 

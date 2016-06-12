@@ -33,8 +33,27 @@ public class AddWeiboPresenterImp implements AddWeiboPresenter {
         addWeiboModel.update(context,content,lat,lon,listener);
     }
 
+    @Override
+    public void repostWeibo(Context context, String content, Weibo weibo) {
+        addWeiboView.showLoadingIcon();
+        addWeiboModel.repost(context, content,weibo,onRepostFinished);
+    }
 
-    AddWeiboModel.OnPostFinished listener = new AddWeiboModel.OnPostFinished() {
+
+    private AddWeiboModel.OnPostFinished listener = new AddWeiboModel.OnPostFinished() {
+        @Override
+        public void successed(Weibo weibo) {
+            addWeiboView.hideLoadingIcon();
+            addWeiboView.showSuccessInfo(weibo);
+        }
+
+        @Override
+        public void failed(String s) {
+            addWeiboView.hideLoadingIcon();
+            addWeiboView.showErrorInfo();
+        }
+    };
+    private AddWeiboModel.OnRepostFinished onRepostFinished = new AddWeiboModel.OnRepostFinished() {
         @Override
         public void successed(Weibo weibo) {
             addWeiboView.hideLoadingIcon();

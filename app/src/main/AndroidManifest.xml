@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.danlvse.weebo">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,6 +9,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <meta-data
+        android:name="com.bumptech.glide.integration.okhttp.OkHttpGlideModule"
+        tools:node="remove" />
 
     <application
         android:allowBackup="true"
@@ -24,10 +29,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.WebViewActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.WebViewActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ProfileActivity"
             android:parentActivityName=".ui.MainActivity"
@@ -57,7 +64,10 @@
             android:name=".ui.AddWeiboActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentActivity"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity android:name=".ui.TopicActivity"></activity>
+        <activity android:name=".ui.FollowersListActivity"></activity>
+        <activity android:name=".ui.TrendsActivity"></activity>
     </application>
 
 </manifest>

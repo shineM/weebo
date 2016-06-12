@@ -16,6 +16,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.danlvse.weebo.R;
 import com.danlvse.weebo.data.Weibo;
 import com.danlvse.weebo.ui.ProfileActivity;
+import com.danlvse.weebo.ui.TopicActivity;
 import com.danlvse.weebo.ui.WeiboDetailActivity;
 import com.danlvse.weebo.utils.ActivityUtils;
 import com.danlvse.weebo.utils.OnKeyClick;
@@ -40,57 +41,40 @@ public class TimelineAdapter extends BaseMultiItemQuickAdapter<Weibo> {
     }
     @Override
     protected void convert(BaseViewHolder baseViewHolder, final Weibo weibo) {
-        final View view;
+        final View view = baseViewHolder.getConvertView();
+        final LinearLayout weiboItem = (LinearLayout) view.findViewById(R.id.weibo_item);
+        LinearLayout actionTab = (LinearLayout) view.findViewById(R.id.action_tab);
+        BindViewUtil.setClick(actionTab,weibo,mActivity);
+        BindViewUtil.bindHeaderInf((ImageView) view.findViewById(R.id.user_avatar), (TextView) view.findViewById(R.id.user_name), (TextView) view.findViewById(R.id.post_time), (TextView) view.findViewById(R.id.post_device), (TextView) view.findViewById(R.id.repost_count), (TextView) view.findViewById(R.id.comments_count), (TextView) view.findViewById(R.id.like_count), mActivity, weibo);
+        BindViewUtil.bindContent((TextView) view.findViewById(R.id.weibo_content), mActivity, weibo.text, new OnWeiboContentListener() {
+            @Override
+            public void onTextClick() {
+                viewDetail(weibo, weiboItem, transition);
+            }
+        }, new OnKeyClick() {
+            @Override
+            public void onUsernameClick(String s) {
+                viewProfile(s);
+            }
+
+            @Override
+            public void onTopicClick(String s) {
+                viewTopic(s);
+            }
+        });
+        view.findViewById(R.id.weibo_item).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewDetail(weibo,weiboItem,transition);
+            }
+        });
         if (weibo.getItemType() == Weibo.ORIGIN) {
-            view = baseViewHolder.getConvertView();
-            final LinearLayout weiboItem = (LinearLayout) view.findViewById(R.id.weibo_item);
-            BindViewUtil.bindHeaderInf((ImageView) view.findViewById(R.id.user_avatar), (TextView) view.findViewById(R.id.user_name), (TextView) view.findViewById(R.id.post_time), (TextView) view.findViewById(R.id.post_device), (TextView) view.findViewById(R.id.repost_count), (TextView) view.findViewById(R.id.comments_count), (TextView) view.findViewById(R.id.like_count), mActivity, weibo);
-            BindViewUtil.bindContent((TextView) view.findViewById(R.id.weibo_content), mActivity, weibo.text, new OnWeiboContentListener() {
-                @Override
-                public void onTextClick() {
-                    viewDetail(weibo, weiboItem, transition);
-                }
-            }, new OnKeyClick() {
-                @Override
-                public void onUsernameClick(String s) {
-                    viewProfile(s);
-                }
 
-                @Override
-                public void onTopicClick(String s) {
-                    viewTopic(s);
-                }
-            });
+
             BindViewUtil.bindImages(mActivity, (RecyclerView) view.findViewById(R.id.weibo_images), weibo);
-            view.findViewById(R.id.weibo_item).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    viewDetail(weibo,weiboItem,transition);
-                }
-            });
+
         } else {
-            view = baseViewHolder.getConvertView();
             final LinearLayout origin = (LinearLayout) view.findViewById(R.id.origin_weibo_item);
-            final LinearLayout repost = (LinearLayout) view.findViewById(R.id.repost_weibo_item);
-
-            //绑定转发内容
-            BindViewUtil.bindHeaderInf((ImageView) view.findViewById(R.id.user_avatar), (TextView) view.findViewById(R.id.user_name), (TextView) view.findViewById(R.id.post_time), (TextView) view.findViewById(R.id.post_device), (TextView) view.findViewById(R.id.repost_count), (TextView) view.findViewById(R.id.comments_count), (TextView) view.findViewById(R.id.like_count), mActivity, weibo);
-            BindViewUtil.bindContent((TextView) view.findViewById(R.id.repost_weibo_content), mActivity, weibo.text, new OnWeiboContentListener() {
-                @Override
-                public void onTextClick() {
-                    viewDetail(weibo, repost, transition);
-                }
-            }, new OnKeyClick() {
-                @Override
-                public void onUsernameClick(String s) {
-                    viewProfile(s);
-                }
-
-                @Override
-                public void onTopicClick(String s) {
-                    viewTopic(s);
-                }
-            });
             String originContent;
             if (weibo.retweeted_status.user != null) {
                 originContent = "@" + weibo.retweeted_status.user.name + " : " + weibo.retweeted_status.text;
@@ -125,13 +109,6 @@ public class TimelineAdapter extends BaseMultiItemQuickAdapter<Weibo> {
                 }
             });
 
-            repost.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    Toast.makeText(mContext, "点击了转发微博：", Toast.LENGTH_SHORT).show();
-                    viewDetail(weibo,repost,transition);
-                }
-            });
 
         }
     }
@@ -143,7 +120,7 @@ public class TimelineAdapter extends BaseMultiItemQuickAdapter<Weibo> {
         mActivity.startActivity(intent);
     }
     private void viewTopic(String topic){
-        Intent intent = new Intent(mContext, ProfileActivity.class);
+        Intent intent = new Intent(mContext, TopicActivity.class);
 
         intent.putExtra("topic",topic);
 

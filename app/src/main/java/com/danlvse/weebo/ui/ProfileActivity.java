@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -23,14 +26,19 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.danlvse.weebo.R;
 import com.danlvse.weebo.data.User;
+import com.danlvse.weebo.data.Weibo;
 import com.danlvse.weebo.model.TokenModel;
 import com.danlvse.weebo.model.imp.TokenModelImp;
 import com.danlvse.weebo.presenter.ProfilePresenter;
 import com.danlvse.weebo.presenter.imp.ProfilePresenterImp;
+import com.danlvse.weebo.ui.adapter.TimelineAdapter;
 import com.danlvse.weebo.ui.view.ProfileView;
 import com.danlvse.weebo.utils.ToastUtil;
 import com.danlvse.weebo.utils.weibo.AccessTokenKeeper;
 import com.pnikosis.materialishprogress.ProgressWheel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -49,7 +57,10 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     private ImageView background;
     private ProfilePresenter profilePresenter;
     private String username;
-    private ProgressWheel progressWheel;
+    private RecyclerView recyclerView;
+    private TimelineAdapter adapter;
+    private List<Weibo> weibos = new ArrayList<>();
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,31 +68,27 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
         setContentView(R.layout.activity_profile);
         context = this;
         bindView();
+        initRecyclerView();
         profilePresenter = new ProfilePresenterImp(this);
         String s = getIntent().getStringExtra("user");
         User user = getIntent().getParcelableExtra("users");
         if (!TextUtils.isEmpty(s)) {
-            username = s.substring(1);
-            profilePresenter.getUser(this, username);
+            username = s.startsWith("@") ? s.substring(1) : s;
             collapsingToolbarLayout.setTitle(username);
+            profilePresenter.getUser(this, username);
+            profilePresenter.getWeibos(this, username);
         } else if (user != null) {
             bindProfile(user);
-            hideLoadingIcon();
-            collapsingToolbarLayout.setTitle(user.name);
+            username = user.name;
+            collapsingToolbarLayout.setTitle(username);
+            profilePresenter.getWeibos(this, username);
         }
-        initMaterialStyle();
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.profile_page_username_size);
-        collapsingToolbarLayout.setExpandedTitleGravity(Gravity.CENTER_HORIZONTAL);
-        collapsingToolbarLayout.setExpandedTitleMarginTop((int) getResources().getDimension(R.dimen.profile_page_username_margin_top));
+    }
 
+    private void initRecyclerView() {
+        adapter = new TimelineAdapter(this, weibos);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 
     private void initMaterialStyle() {
@@ -111,15 +118,46 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     }
 
     private void bindView() {
+        recyclerView = (RecyclerView) findViewById(R.id.profile_weibo_list);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        setUpSwipeRefresh();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         avatar = (ImageView) findViewById(R.id.profile_activity_avatar);
         followCount = (TextView) findViewById(R.id.profile_follow_count);
+        followCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, FollowersListActivity.class);
+                intent.putExtra("user", username);
+                startActivity(intent);
+            }
+        });
         followerCount = (TextView) findViewById(R.id.profile_follower_count_count);
         sign = (TextView) findViewById(R.id.profile_sign);
         background = (ImageView) findViewById(R.id.profile_user_background);
-        progressWheel = (ProgressWheel) findViewById(R.id.loading_progress);
+        initMaterialStyle();
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.profile_page_username_size);
+        collapsingToolbarLayout.setExpandedTitleGravity(Gravity.CENTER_HORIZONTAL);
+        collapsingToolbarLayout.setExpandedTitleMarginTop((int) getResources().getDimension(R.dimen.profile_page_username_margin_top));
+    }
 
+    private void setUpSwipeRefresh() {
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                profilePresenter.getWeibos(context, username);
+            }
+        });
     }
 
     @Override
@@ -137,21 +175,27 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     }
 
     @Override
+    public void updateWeiboList(List<Weibo> list) {
+        this.weibos = list;
+        adapter.setNewData(weibos);
+    }
+
+    @Override
     public void showErrorInfo() {
         ToastUtil.showShort(this, "访问出错啦，请重试");
     }
 
     @Override
     public void showLoadingIcon() {
-        if (progressWheel.getVisibility() != View.VISIBLE) {
-            progressWheel.setVisibility(View.VISIBLE);
+        if (!swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(true);
         }
     }
 
     @Override
     public void hideLoadingIcon() {
-        if (progressWheel.getVisibility() == View.VISIBLE) {
-            progressWheel.setVisibility(View.GONE);
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 }

@@ -40,31 +40,45 @@
             android:paddingRight="31dp"
             android:paddingTop="5dp"
             android:textSize="15sp" />
-
+        <TextView
+            android:id="@+id/repost_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@color/repost_background"
+            android:text="@string/repost_weibo_hint"
+            android:visibility="visible"/>
         <FrameLayout
+            android:id="@+id/image_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:id="@+id/image_container"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_margin="10dp">
 
-            android:id="@+id/image_container"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_margin="10dp">
+                <ImageView
+                    android:id="@+id/selected_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-            <ImageView
-                android:id="@+id/selected_picture"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/cancel_button"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right|top"
+                    android:background="@drawable/cancel_button_bg"
+                    android:src="@mipmap/ic_cancel_white_24dp"
+                    android:visibility="invisible" />
 
-            <ImageView
-                android:id="@+id/cancel_button"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="right|top"
-                android:background="@drawable/cancel_button_bg"
-                android:src="@mipmap/ic_cancel_white_24dp"
-                android:visibility="invisible" />
+            </FrameLayout>
 
         </FrameLayout>
 
+
         <LinearLayout
+            android:id="@+id/botton_menu"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="#ececec"

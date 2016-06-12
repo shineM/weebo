@@ -50,4 +50,20 @@ public class AddWeiboModelImp implements AddWeiboModel {
             }
         });
     }
+
+    @Override
+    public void repost(Context context, String content, Weibo weibo, final OnRepostFinished onRepostFinished) {
+        StatusesAPI api = new StatusesAPI(context,Constants.APP_KEY, AccessTokenKeeper.readAccessToken(context));
+        api.repost(Long.valueOf(weibo.id), content, 0, new RequestListener() {
+            @Override
+            public void onComplete(String s) {
+                onRepostFinished.successed(Weibo.parse(s));
+            }
+
+            @Override
+            public void onWeiboException(WeiboException e) {
+                onRepostFinished.failed(e.toString());
+            }
+        });
+    }
 }

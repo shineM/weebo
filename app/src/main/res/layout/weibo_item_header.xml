@@ -13,20 +13,20 @@
             android:id="@+id/user_avatar"
             android:layout_width="@dimen/avatar_size"
             android:layout_height="@dimen/avatar_size"
+            android:layout_alignParentLeft="true"
             android:layout_marginLeft="@dimen/weibo_avatar_margin_left"
             android:layout_marginTop="@dimen/weibo_avatar_margin_top"
-            android:layout_alignParentLeft="true"
             android:background="@drawable/avatar_background"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:textColor="@color/username_text_color"
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/weibo_username_margin_left"
             android:layout_marginTop="@dimen/weibo_username_margin_top"
             android:text="@string/account_name"
+            android:textColor="@color/username_text_color"
             android:textSize="@dimen/weibo_username_size" />
 
         <LinearLayout
@@ -54,6 +54,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/action_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -62,6 +63,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/repost_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/comment_margin_top"
@@ -76,8 +78,8 @@
                 android:textColor="@color/light_black" />
 
             <ImageView
+                android:id="@+id/comment_icon"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/comment_margin_top"
                 android:src="@mipmap/ic_chat_bubble_outline_black_24dp" />
@@ -91,8 +93,8 @@
                 android:textColor="@color/light_black" />
 
             <ImageView
+                android:id="@+id/like_icon"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/comment_margin_top"
                 android:src="@mipmap/ic_favorite_border_black_24dp" />

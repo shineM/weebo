@@ -31,6 +31,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,7 +54,13 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
     private static final int REQUEST_WRITE_PERMISSION_CODE = 0;
     private static final int REQUEST_CAMERA_CODE = 0;
     private static final int REQUEST_LIBRARY_CODE = 2;
+    public static final String ORIGIN_WEIBO = "originWeibo";
+    public static final String IS_REPOST = "isRepost";
+    public static final String REPOST_CONTENT = "repostContent";
     private View container;
+    private TextView repostText;
+    private FrameLayout imageLayout;
+    private LinearLayout bottomMenu;
     private LinearLayout addWindow;
     private EditText mInputText;
     private TextView mUserName;
@@ -69,12 +76,17 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
     private AddWeiboPresenter presenter;
     private PermissionUtils.PermissionOperation operation;
     private ProgressWheel progressWheel;
-
+    private Boolean isRepost;
+    private String repostContent;
+    private Weibo originWeibo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_weibo);
+        isRepost = getIntent().getBooleanExtra(IS_REPOST,false);
+        originWeibo = getIntent().getParcelableExtra(ORIGIN_WEIBO);
+        repostContent = getIntent().getStringExtra(REPOST_CONTENT);
         presenter = new AddWeiboPresenterImp(this);
         operation = new PermissionUtils.PermissionOperation() {
             @Override
@@ -84,9 +96,25 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
                 }
             }
         };
+
         bindView();
         setAnim();
         setUpView();
+        initPostType();
+    }
+
+    private void initPostType() {
+        if (isRepost){
+            mPostButton.setText("转发");
+            bottomMenu.setVisibility(View.GONE);
+            mInputText.setHint("转发微博");
+            repostText.setText(repostContent);
+            imageLayout.setVisibility(View.GONE);
+//            mInputText.requestFocus();
+//            InputMethodManager inputMethodManager = (InputMethodManager) mInputText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//            inputMethodManager.toggleSoftInput(0,InputMethodManager.SHOW_FORCED);
+//            mInputText.setSelection(0);
+        }
     }
 
     private void startChooseDialog() {
@@ -175,11 +203,19 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
         mPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                content = mInputText.getText().toString();
-                if (TextUtils.isEmpty(content)) {
-                    ToastUtil.showShort(getApplicationContext(),"还是说点什么吧");
-                } else {
-                    sendWeibo(content);
+                if (isRepost){
+                    content = mInputText.getText().toString();
+                    if (TextUtils.isEmpty(content)){
+                        content = "转发微博";
+                    }
+                    repostWeibo(content);
+                }else{
+                    content = mInputText.getText().toString();
+                    if (TextUtils.isEmpty(content)) {
+                        ToastUtil.showShort(getApplicationContext(),"还是说点什么吧");
+                    } else {
+                        sendWeibo(content);
+                    }
                 }
             }
         });
@@ -190,6 +226,10 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
                 mCancelButton.setVisibility(View.GONE);
             }
         });
+    }
+
+    private void repostWeibo(String content) {
+        presenter.repostWeibo(this,content,originWeibo);
     }
 
     @Override
@@ -211,6 +251,9 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
     }
 
     private void bindView() {
+        repostText = (TextView) findViewById(R.id.repost_content);
+        imageLayout = (FrameLayout) findViewById(R.id.image_layout);
+        bottomMenu = (LinearLayout) findViewById(R.id.botton_menu);
         container = findViewById(R.id.container);
         addWindow = (LinearLayout) findViewById(R.id.add_window);
         mInputText = (EditText) findViewById(R.id.add_content);

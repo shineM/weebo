@@ -60,6 +60,7 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
     private Fragment likesFragment;
     private SlidingTabLayout mTabLayout;
     private NestedScrollView nestedScrollView;
+    private View actionTab;
 
 
     @Override
@@ -126,6 +127,7 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
     }
 
     private void initWeiboData() {
+        actionTab = findViewById(R.id.action_tab);
         avatar = (ImageView) findViewById(R.id.user_avatar);
         username = (TextView) findViewById(R.id.user_name);
         postTime = (TextView) findViewById(R.id.post_time);
@@ -135,12 +137,13 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
         likeCount = (TextView) findViewById(R.id.like_count);
         content = (TextView) findViewById(R.id.weibo_content);
         originWeiboItem = (LinearLayout) findViewById(R.id.origin_weibo);
+        BindViewUtil.setClick(actionTab,mWeibo,WeiboDetailActivity.this);
         if (mWeibo.retweeted_status == null) {
             imgList = (RecyclerView) findViewById(R.id.image_list);
 
             originWeiboItem.setVisibility(View.GONE);
             BindViewUtil.bindHeaderInf(avatar, username, postTime, postDevice, repostCount, commentCount, likeCount, this, mWeibo);
-            BindViewUtil.bindContent(content, mContext, mWeibo.text, new OnWeiboContentListener() {
+            BindViewUtil.bindContent(content, this, mWeibo.text, new OnWeiboContentListener() {
                 @Override
                 public void onTextClick() {
                     return;
@@ -161,7 +164,7 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
 
         } else {
             BindViewUtil.bindHeaderInf(avatar, username, postTime, postDevice, repostCount, commentCount, likeCount, this, mWeibo);
-            BindViewUtil.bindContent(content, mContext, mWeibo.text, new OnWeiboContentListener() {
+            BindViewUtil.bindContent(content, this, mWeibo.text, new OnWeiboContentListener() {
                 @Override
                 public void onTextClick() {
                     return;
@@ -185,7 +188,7 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
             }
             imgList = (RecyclerView) findViewById(R.id.origin_weibo_image_list);
             originWeiboContent = (TextView) findViewById(R.id.origin_weibo_content);
-            BindViewUtil.bindContent(originWeiboContent, mContext, originContent, new OnWeiboContentListener() {
+            BindViewUtil.bindContent(originWeiboContent, this, originContent, new OnWeiboContentListener() {
                 @Override
                 public void onTextClick() {
                     Intent intent = new Intent(mContext, WeiboDetailActivity.class);

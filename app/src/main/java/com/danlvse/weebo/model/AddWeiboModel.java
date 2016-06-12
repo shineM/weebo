@@ -14,6 +14,16 @@ public interface AddWeiboModel {
 
         void failed(String s);
     }
-    void upload(Context context,String content, Bitmap bitmap, String lat, String lon, OnPostFinished onPostFinished);
-    void update(Context context,String content, String lat, String lon,OnPostFinished onPostFinished);
+
+    interface OnRepostFinished {
+        void successed(Weibo weibo);
+
+        void failed(String s);
+    }
+
+    void upload(Context context, String content, Bitmap bitmap, String lat, String lon, OnPostFinished onPostFinished);
+
+    void update(Context context, String content, String lat, String lon, OnPostFinished onPostFinished);
+
+    void repost(Context context, String content, Weibo weibo, OnRepostFinished onRepostFinished);
 }

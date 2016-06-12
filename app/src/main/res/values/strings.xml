@@ -32,4 +32,6 @@
     <string name="transition_weibo_item">weibo item transition</string>
     <string name="transition_weibo_origin_item">origin_transition</string>
     <string name="follow_count">关注  78  </string>
+    <string name="follow_list">粉丝列表</string>
+    <string name="repost_weibo_hint">//@shineMicroxy:啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</string>
 </resources>

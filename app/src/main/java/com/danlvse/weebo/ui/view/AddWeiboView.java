@@ -7,7 +7,10 @@ import com.danlvse.weebo.data.Weibo;
  */
 public interface AddWeiboView {
     void showErrorInfo();
+
     void showSuccessInfo(Weibo weibo);
+
     void showLoadingIcon();
+
     void hideLoadingIcon();
 }

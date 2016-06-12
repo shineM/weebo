@@ -11,9 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.integration.okhttp.OkHttpUrlLoader;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -23,16 +27,22 @@ import com.cesards.cropimageview.CropImageView;
 import com.danlvse.weebo.R;
 import com.danlvse.weebo.data.Comment;
 import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.AddWeiboModel;
+import com.danlvse.weebo.model.imp.AddWeiboModelImp;
+import com.danlvse.weebo.ui.AddWeiboActivity;
 import com.danlvse.weebo.ui.ProfileActivity;
 import com.danlvse.weebo.ui.adapter.ImageListAdapter;
 import com.danlvse.weebo.utils.BitmapClipUtil;
 import com.danlvse.weebo.utils.DateUtils;
 import com.danlvse.weebo.utils.OnKeyClick;
 import com.danlvse.weebo.utils.OnWeiboContentListener;
+import com.squareup.okhttp.OkHttpClient;
 
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -87,8 +97,8 @@ public class BindViewUtil {
         return s;
     }
 
-    public static void bindContent(TextView content, Context mContext, String text, OnWeiboContentListener listener, OnKeyClick onKeyClick) {
-        content.setText(WeiboContentKeyUtil.getWeiBoContent(text, mContext, content, listener,onKeyClick));
+    public static void bindContent(TextView content, Activity activity, String text, OnWeiboContentListener listener, OnKeyClick onKeyClick) {
+        content.setText(WeiboContentKeyUtil.getWeiBoContent(text, activity, content, listener,onKeyClick));
     }
 
     public static void bindImages(Activity mContext, RecyclerView imgList, Weibo weibo) {
@@ -135,17 +145,23 @@ public class BindViewUtil {
     }
 
     public static void loadImages(final Activity mContext, String url, final ImageView imageView, final TextView imageType, final Boolean isSingle) {
+        Glide glide = Glide.get(mContext);
+        OkHttpClient client = new OkHttpClient();
+        client.setConnectTimeout(15, TimeUnit.SECONDS);
+        client.setReadTimeout(30, TimeUnit.SECONDS);
+        OkHttpUrlLoader.Factory factory = new OkHttpUrlLoader.Factory(client);
+        glide.register(GlideUrl.class, InputStream.class, factory);
         if (isSingle) {
             FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) imageView.getLayoutParams();
             lp.height = (int) mContext.getResources().getDimension(R.dimen.home_weiboitem_imagesize_horizontal_rectangle_height);
             lp.width = (int) mContext.getResources().getDimension(R.dimen.home_weiboitem_imagesize_horizontal_rectangle_width);
         }
         if (url.endsWith(".gif")) {
-            Glide.with(mContext).load(url).asBitmap().into(imageView);
+            glide.with(mContext).load(url).asBitmap().diskCacheStrategy(DiskCacheStrategy.NONE).into(imageView);
             imageType.setText("GIF");
             imageType.setVisibility(View.VISIBLE);
         } else {
-            Glide.with(mContext).load(url).asBitmap().centerCrop().into(new SimpleTarget<Bitmap>() {
+            glide.with(mContext).load(url).asBitmap().centerCrop().into(new SimpleTarget<Bitmap>() {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                     int width = resource.getWidth();
@@ -159,12 +175,37 @@ public class BindViewUtil {
                         imageType.setVisibility(View.VISIBLE);
                         imageView.setImageBitmap(BitmapClipUtil.centerSquareScaleBitmap(resource, (int) mContext.getResources().getDimension(R.dimen.home_weiboitem_imagesize_horizontal_rectangle_height)));
 
-
                     }
-
                 }
             });
         }
 
+    }
+
+    public static void setClick(View actionTab, final Weibo weibo, final Activity mActivity) {
+        ImageView repostIcon = (ImageView) actionTab.findViewById(R.id.repost_icon);
+        TextView repostCount = (TextView) actionTab.findViewById(R.id.repost_count);
+        final AddWeiboModel.OnRepostFinished listener = new AddWeiboModel.OnRepostFinished() {
+            @Override
+            public void successed(Weibo weibo) {
+
+            }
+
+            @Override
+            public void failed(String s) {
+
+            }
+        };
+        repostIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                AddWeiboModelImp.repostWeibo(mActivity,weibo,"",0,listener);
+                Intent intent = new Intent(mActivity, AddWeiboActivity.class);
+                intent.putExtra(AddWeiboActivity.IS_REPOST,true);
+                intent.putExtra(AddWeiboActivity.REPOST_CONTENT,"//@"+weibo.user.name+":"+weibo.text);
+                intent.putExtra(AddWeiboActivity.ORIGIN_WEIBO,(Parcelable) weibo);
+                mActivity.startActivity(intent);
+            }
+        });
     }
 }
