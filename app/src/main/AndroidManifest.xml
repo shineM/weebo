@@ -65,9 +65,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/TransparentActivity"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
-        <activity android:name=".ui.TopicActivity"></activity>
-        <activity android:name=".ui.FollowersListActivity"></activity>
-        <activity android:name=".ui.TrendsActivity"></activity>
+        <activity android:name=".ui.TopicActivity" />
+        <activity android:name=".ui.FollowersListActivity" />
+        <activity android:name=".ui.TrendsActivity" />
+        <activity android:name=".ui.MessageActivity"></activity>
     </application>
 
 </manifest>

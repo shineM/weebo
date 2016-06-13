@@ -47,7 +47,7 @@
             android:padding="5dp"
             android:background="@color/repost_background"
             android:text="@string/repost_weibo_hint"
-            android:visibility="visible"/>
+            android:visibility="invisible"/>
         <FrameLayout
             android:id="@+id/image_layout"
             android:layout_width="match_parent"

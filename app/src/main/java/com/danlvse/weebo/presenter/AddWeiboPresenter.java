@@ -14,4 +14,6 @@ public interface AddWeiboPresenter {
     void postWeibo(Context context, String content, String lat, String lon);
 
     void repostWeibo(Context context, String content, Weibo weibo);
+
+    void commentWeibo(Context context,String content, Weibo weibo);
 }

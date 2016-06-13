@@ -4,38 +4,33 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.integration.okhttp.OkHttpUrlLoader;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
-import com.cesards.cropimageview.CropImageView;
 import com.danlvse.weebo.R;
 import com.danlvse.weebo.data.Comment;
+import com.danlvse.weebo.data.User;
 import com.danlvse.weebo.data.Weibo;
 import com.danlvse.weebo.model.AddWeiboModel;
-import com.danlvse.weebo.model.imp.AddWeiboModelImp;
 import com.danlvse.weebo.ui.AddWeiboActivity;
 import com.danlvse.weebo.ui.ProfileActivity;
+import com.danlvse.weebo.ui.TopicActivity;
 import com.danlvse.weebo.ui.adapter.ImageListAdapter;
 import com.danlvse.weebo.utils.BitmapClipUtil;
 import com.danlvse.weebo.utils.DateUtils;
+import com.danlvse.weebo.utils.OnContentClickListener;
 import com.danlvse.weebo.utils.OnKeyClick;
-import com.danlvse.weebo.utils.OnWeiboContentListener;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.io.InputStream;
@@ -54,7 +49,18 @@ public class BindViewUtil {
     public static final int IMAGE_TYPE_LONG_PIC = 2;//比较长的微博（但是不至于像长微博那么长）
     public static final int IMAGE_TYPE_WIDTH_PIC = 3;//比较宽的微博
     public static final int IMAGE_TYPE_GIF = 4;
+    private static OnKeyClick onKeyClick = new OnKeyClick() {
+        @Override
+        public void onUsernameClick(String s, Context context) {
+            viewProfile(s, context);
+        }
 
+        @Override
+        public void onTopicClick(String s, Context context) {
+            viewTopic(s, context);
+        }
+
+    };
     public static void bindHeaderInf(ImageView avatar, TextView username, TextView postTime, TextView postDevice, TextView repostCount, TextView commentCount, TextView likeCount, final Activity activity,final Weibo weibo) {
         Glide.with(activity).load(weibo.user.avatar_large).bitmapTransform(new CropCircleTransformation(activity)).placeholder(R.mipmap.ic_person_white_24dp).into(avatar);
         avatar.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +103,7 @@ public class BindViewUtil {
         return s;
     }
 
-    public static void bindContent(TextView content, Activity activity, String text, OnWeiboContentListener listener, OnKeyClick onKeyClick) {
+    public static void bindContent(TextView content, Context activity, String text, OnContentClickListener listener) {
         content.setText(WeiboContentKeyUtil.getWeiBoContent(text, activity, content, listener,onKeyClick));
     }
 
@@ -184,6 +190,7 @@ public class BindViewUtil {
 
     public static void setClick(View actionTab, final Weibo weibo, final Activity mActivity) {
         ImageView repostIcon = (ImageView) actionTab.findViewById(R.id.repost_icon);
+        ImageView commentIcon = (ImageView) actionTab.findViewById(R.id.comment_icon);
         TextView repostCount = (TextView) actionTab.findViewById(R.id.repost_count);
         final AddWeiboModel.OnRepostFinished listener = new AddWeiboModel.OnRepostFinished() {
             @Override
@@ -207,5 +214,59 @@ public class BindViewUtil {
                 mActivity.startActivity(intent);
             }
         });
+        commentIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mActivity, AddWeiboActivity.class);
+                intent.putExtra(AddWeiboActivity.IS_COMMENT,true);
+                intent.putExtra(AddWeiboActivity.REPOST_CONTENT,"@"+weibo.user.name+":"+weibo.text);
+                intent.putExtra(AddWeiboActivity.ORIGIN_WEIBO,(Parcelable) weibo);
+                mActivity.startActivity(intent);
+            }
+        });
     }
+
+    /**
+     * 绑定用户头像和昵称
+     * @param mActivity Context
+     * @param user  User
+     * @param avatar ImageView
+     * @param username  用户名
+     */
+    public static void bindUser(final Context mActivity, final User user, ImageView avatar, TextView username) {
+        Glide.with(mActivity).load(user.avatar_large).bitmapTransform(new CropCircleTransformation(mActivity)).placeholder(R.mipmap.ic_person_white_24dp).into(avatar);
+        username.setText(user.name);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewProfile(user, mActivity);
+            }
+        };
+        avatar.setOnClickListener(listener);
+        username.setOnClickListener(listener);
+    }
+
+
+    private static void viewProfile(String username, Context mContext){
+        Intent intent = new Intent(mContext, ProfileActivity.class);
+
+        intent.putExtra("user",username);
+
+        mContext.startActivity(intent);
+    }
+    private static void viewProfile(User user, Context mContext){
+        Intent intent = new Intent(mContext, ProfileActivity.class);
+
+        intent.putExtra("users",(Parcelable)user);
+
+        mContext.startActivity(intent);
+    }
+    private static void viewTopic(String topic, Context mContext){
+        Intent intent = new Intent(mContext, TopicActivity.class);
+
+        intent.putExtra("topic",topic);
+
+        mContext.startActivity(intent);
+    }
+
 }

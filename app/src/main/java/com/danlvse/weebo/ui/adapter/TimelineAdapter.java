@@ -1,7 +1,6 @@
 package com.danlvse.weebo.ui.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -20,7 +18,7 @@ import com.danlvse.weebo.ui.TopicActivity;
 import com.danlvse.weebo.ui.WeiboDetailActivity;
 import com.danlvse.weebo.utils.ActivityUtils;
 import com.danlvse.weebo.utils.OnKeyClick;
-import com.danlvse.weebo.utils.OnWeiboContentListener;
+import com.danlvse.weebo.utils.OnContentClickListener;
 import com.danlvse.weebo.utils.weibo.BindViewUtil;
 
 import java.util.List;
@@ -46,20 +44,10 @@ public class TimelineAdapter extends BaseMultiItemQuickAdapter<Weibo> {
         LinearLayout actionTab = (LinearLayout) view.findViewById(R.id.action_tab);
         BindViewUtil.setClick(actionTab,weibo,mActivity);
         BindViewUtil.bindHeaderInf((ImageView) view.findViewById(R.id.user_avatar), (TextView) view.findViewById(R.id.user_name), (TextView) view.findViewById(R.id.post_time), (TextView) view.findViewById(R.id.post_device), (TextView) view.findViewById(R.id.repost_count), (TextView) view.findViewById(R.id.comments_count), (TextView) view.findViewById(R.id.like_count), mActivity, weibo);
-        BindViewUtil.bindContent((TextView) view.findViewById(R.id.weibo_content), mActivity, weibo.text, new OnWeiboContentListener() {
+        BindViewUtil.bindContent((TextView) view.findViewById(R.id.weibo_content), mActivity, weibo.text, new OnContentClickListener() {
             @Override
             public void onTextClick() {
                 viewDetail(weibo, weiboItem, transition);
-            }
-        }, new OnKeyClick() {
-            @Override
-            public void onUsernameClick(String s) {
-                viewProfile(s);
-            }
-
-            @Override
-            public void onTopicClick(String s) {
-                viewTopic(s);
             }
         });
         view.findViewById(R.id.weibo_item).setOnClickListener(new View.OnClickListener() {
@@ -82,20 +70,10 @@ public class TimelineAdapter extends BaseMultiItemQuickAdapter<Weibo> {
                 originContent = "抱歉，此微博已被作者删除。";
             }
             //绑定原微博内容
-            BindViewUtil.bindContent((TextView) view.findViewById(R.id.origin_weibo_content), mActivity, originContent, new OnWeiboContentListener() {
+            BindViewUtil.bindContent((TextView) view.findViewById(R.id.origin_weibo_content), mActivity, originContent, new OnContentClickListener() {
                 @Override
                 public void onTextClick() {
                     viewDetail(weibo.retweeted_status, origin, transition);
-                }
-            }, new OnKeyClick() {
-                @Override
-                public void onUsernameClick(String s) {
-                    viewProfile(s);
-                }
-
-                @Override
-                public void onTopicClick(String s) {
-                    viewTopic(s);
                 }
             });
             BindViewUtil.bindImages(mActivity, (RecyclerView) view.findViewById(R.id.origin_weibo_image_list), weibo.retweeted_status);

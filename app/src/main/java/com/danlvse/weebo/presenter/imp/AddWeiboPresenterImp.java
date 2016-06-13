@@ -3,6 +3,7 @@ package com.danlvse.weebo.presenter.imp;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.danlvse.weebo.data.Comment;
 import com.danlvse.weebo.data.Weibo;
 import com.danlvse.weebo.model.AddWeiboModel;
 import com.danlvse.weebo.model.imp.AddWeiboModelImp;
@@ -39,7 +40,25 @@ public class AddWeiboPresenterImp implements AddWeiboPresenter {
         addWeiboModel.repost(context, content,weibo,onRepostFinished);
     }
 
+    @Override
+    public void commentWeibo(Context context, String content, Weibo weibo) {
+        addWeiboView.showLoadingIcon();
+        addWeiboModel.comment(context,content,weibo,onCommentFinished);
+    }
 
+    private AddWeiboModel.OnCommentFinished onCommentFinished = new AddWeiboModel.OnCommentFinished() {
+        @Override
+        public void successed(Comment comment) {
+            addWeiboView.hideLoadingIcon();
+            addWeiboView.showSuccessInfo(comment.status);
+        }
+
+        @Override
+        public void failed(String s) {
+            addWeiboView.hideLoadingIcon();
+            addWeiboView.showErrorInfo();
+        }
+    };
     private AddWeiboModel.OnPostFinished listener = new AddWeiboModel.OnPostFinished() {
         @Override
         public void successed(Weibo weibo) {

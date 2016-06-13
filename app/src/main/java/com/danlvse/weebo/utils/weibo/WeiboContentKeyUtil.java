@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.danlvse.weebo.ui.widget.ContentClickableSpan;
 import com.danlvse.weebo.ui.widget.WeiboContentClickableSpan;
+import com.danlvse.weebo.utils.OnContentClickListener;
 import com.danlvse.weebo.utils.OnKeyClick;
-import com.danlvse.weebo.utils.OnWeiboContentListener;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,8 +29,16 @@ public class WeiboContentKeyUtil {
     private static final String URL = "http://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";// url
     private static final String ALL = "(@[\u4e00-\u9fa5\\w_-]{2,30})|(#[\u4e00-\u9fa5\\w]+#)|(http://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])";
 
-    //微博正文字符串解析
-    public static SpannableString getWeiBoContent(final String source, final Context context, TextView textView, final OnWeiboContentListener listener, final OnKeyClick onKeyClick) {
+    /**
+     * 微博正文字符串解析
+     * @param source 目标字符串
+     * @param context  Context
+     * @param textView 填充区域
+     * @param listener  正文点击回调接口
+     * @param onKeyClick   关键字点击回调接口
+     * @return SpannableString
+     */
+    public static SpannableString getWeiBoContent(final String source, final Context context, TextView textView, final OnContentClickListener listener, final OnKeyClick onKeyClick) {
         SpannableString spannableString = new SpannableString(source);
         //设置正则
         Pattern pattern = Pattern.compile(ALL);
@@ -57,7 +65,7 @@ public class WeiboContentKeyUtil {
                 WeiboContentClickableSpan myClickableSpan = new WeiboContentClickableSpan(context) {
                     @Override
                     public void onClick(View widget) {
-                        onKeyClick.onUsernameClick(s.toString());
+                        onKeyClick.onUsernameClick(s.toString(),context);
                     }
                 };
                 spannableString.setSpan(myClickableSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -66,7 +74,7 @@ public class WeiboContentKeyUtil {
                 WeiboContentClickableSpan myClickableSpan = new WeiboContentClickableSpan(context) {
                     @Override
                     public void onClick(View widget) {
-                        onKeyClick.onTopicClick(s.toString());
+                        onKeyClick.onTopicClick(s.toString(),context);
                     }
                 };
                 spannableString.setSpan(myClickableSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

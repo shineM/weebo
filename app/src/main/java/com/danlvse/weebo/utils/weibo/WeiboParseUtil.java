@@ -1,5 +1,6 @@
 package com.danlvse.weebo.utils.weibo;
 
+import com.danlvse.weebo.data.Comment;
 import com.danlvse.weebo.data.Topic;
 import com.danlvse.weebo.data.User;
 import com.danlvse.weebo.data.Weibo;
@@ -15,6 +16,7 @@ import java.util.List;
  * Created by zxy on 16/5/25.
  */
 public class WeiboParseUtil {
+    //解析微博列表
     public static ArrayList<Weibo> parseWeiboList(String response) {
         ArrayList<Weibo> mWeiboList = new ArrayList<Weibo>();
         try {
@@ -31,7 +33,7 @@ public class WeiboParseUtil {
         }
         return mWeiboList;
     }
-
+    //解析用户列表
     public static ArrayList<User> parseUserList(String s) {
         ArrayList<User> users = new ArrayList<>();
         try {
@@ -47,7 +49,7 @@ public class WeiboParseUtil {
         }
         return users;
     }
-
+    //解析热门话题列表
     public static ArrayList<Topic> parseTopicList(String s) {
         ArrayList<Topic> topics = new ArrayList<>();
         try {
@@ -65,5 +67,22 @@ public class WeiboParseUtil {
             e.printStackTrace();
         }
         return topics;
+    }
+    //解析评论列表
+    public static ArrayList<Comment> parseCommentList(String s){
+        ArrayList<Comment> comments = new ArrayList<>();
+        try {
+            JSONObject jsonObject = new JSONObject(s);
+            JSONArray jsonArray = jsonObject.optJSONArray("comments");
+            if (null!=jsonArray&&jsonArray.length()>0){
+                int len = jsonArray.length();
+                for (int i = 0; i < len; i++){
+                    comments.add(Comment.parse(jsonArray.getJSONObject(i)));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return comments;
     }
 }

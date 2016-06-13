@@ -1,25 +1,5 @@
 package com.danlvse.weebo.ui.adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Parcelable;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Weibo;
-import com.danlvse.weebo.ui.MainActivity;
-import com.danlvse.weebo.ui.WeiboDetailActivity;
-import com.danlvse.weebo.utils.OnWeiboContentListener;
-import com.danlvse.weebo.utils.weibo.BindViewUtil;
-
-import java.util.List;
-
 /**
  * Created by zxy on 16/5/25.
  */
@@ -66,7 +46,7 @@ public class WeiboListAdapter {
 //        if (holder instanceof WeiboViewHolder) {
 //            WeiboViewHolder viewHolder = (WeiboViewHolder) holder;
 ////            BindViewUtil.bindHeaderInf(viewHolder.avatar, viewHolder.username, viewHolder.postTime, viewHolder.postDevice, viewHolder.repostCount, viewHolder.commentCount, viewHolder.likeCount, mContext, weibo);
-////            BindViewUtil.bindContent(viewHolder.content, mA, weibo.text, new OnWeiboContentListener() {
+////            BindViewUtil.bindContent(viewHolder.content, mA, weibo.text, new OnContentClickListener() {
 ////                @Override
 ////                public void onTextClick() {
 ////                    viewDetail(weibo);
@@ -84,7 +64,7 @@ public class WeiboListAdapter {
 //            RepostWeiboViewHolder viewHolder = (RepostWeiboViewHolder) holder;
 //            //绑定转发内容
 ////            BindViewUtil.bindHeaderInf(viewHolder.avatar, viewHolder.username, viewHolder.postTime, viewHolder.postDevice, viewHolder.repostCount, viewHolder.commentCount, viewHolder.likeCount, mContext, weibo);
-////            BindViewUtil.bindContent(viewHolder.content, mContext, weibo.text, new OnWeiboContentListener() {
+////            BindViewUtil.bindContent(viewHolder.content, mContext, weibo.text, new OnContentClickListener() {
 ////                @Override
 ////                public void onTextClick() {
 ////                    viewDetail(weibo);
@@ -97,7 +77,7 @@ public class WeiboListAdapter {
 //                originContent = "抱歉，此微博已被作者删除。";
 //            }
 //            //绑定原微博内容
-////            BindViewUtil.bindContent(viewHolder.originContent, mContext, originContent, new OnWeiboContentListener() {
+////            BindViewUtil.bindContent(viewHolder.originContent, mContext, originContent, new OnContentClickListener() {
 ////                @Override
 ////                public void onTextClick() {
 ////                    viewDetail(weibo.retweeted_status);

@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.danlvse.weebo.R;
 import com.danlvse.weebo.data.Comment;
+import com.danlvse.weebo.utils.OnContentClickListener;
+import com.danlvse.weebo.utils.ToastUtil;
 import com.danlvse.weebo.utils.weibo.BindViewUtil;
 
 import java.util.ArrayList;
@@ -38,10 +40,20 @@ public class CommentListAdapter extends AnimRecyclerViewAdapter<RecyclerView.Vie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Comment comment = mComments.get(position);
         CommentItemViewHolder v = (CommentItemViewHolder) holder;
-        BindViewUtil.bindCommentHeader(v.avatar, v.username, v.time, v.content, comment, mContext);
-//        ObjectAnimator ani = ObjectAnimator.ofFloat(v.item,"alpha",0.5f,1.0f);
-//        ani.setDuration(500);
-//        ani.start();
+        BindViewUtil.bindUser(mContext, comment.user,v.avatar, v.username);
+        BindViewUtil.bindContent(v.content, mContext, comment.text, new OnContentClickListener() {
+            @Override
+            public void onTextClick() {
+//                ToastUtil.showShort(mContext,"回复评论");
+            }
+        });
+        v.content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showShort(mContext,"回复评论");
+            }
+        });
+        v.time.setText(BindViewUtil.formatDate(comment.created_at));
         showItemAnim(v.content,position);
     }
 

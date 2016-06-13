@@ -3,7 +3,9 @@ package com.danlvse.weebo.model.imp;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.danlvse.weebo.data.Comment;
 import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.data.api.CommentsAPI;
 import com.danlvse.weebo.data.api.StatusesAPI;
 import com.danlvse.weebo.model.AddWeiboModel;
 import com.danlvse.weebo.utils.Constants;
@@ -63,6 +65,22 @@ public class AddWeiboModelImp implements AddWeiboModel {
             @Override
             public void onWeiboException(WeiboException e) {
                 onRepostFinished.failed(e.toString());
+            }
+        });
+    }
+
+    @Override
+    public void comment(Context context, String content, Weibo weibo, final OnCommentFinished onCommentFinished) {
+        CommentsAPI api = new CommentsAPI(context,Constants.APP_KEY,AccessTokenKeeper.readAccessToken(context));
+        api.create(content, Long.valueOf(weibo.id), false, new RequestListener() {
+            @Override
+            public void onComplete(String s) {
+                onCommentFinished.successed(Comment.parse(s));
+            }
+
+            @Override
+            public void onWeiboException(WeiboException e) {
+                onCommentFinished.failed(e.toString());
             }
         });
     }
