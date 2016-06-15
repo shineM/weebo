@@ -40,6 +40,6 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.7.2'
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile 'com.cesards.android:cropimageview:1.0.2.1'
-
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 
 }

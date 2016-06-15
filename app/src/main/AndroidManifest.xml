@@ -64,7 +64,7 @@
             android:name=".ui.AddWeiboActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentActivity"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.TopicActivity" />
         <activity android:name=".ui.FollowersListActivity" />
         <activity android:name=".ui.TrendsActivity" />

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#819fb9</color>
-    <color name="colorPrimaryDark">#819fb9</color>
-    <color name="colorAccent">#f06292</color>
+    <color name="colorPrimary">#607D8B</color>
+    <color name="colorPrimaryDark">#455A64</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="primaryText">#212121</color>
+    <color name="secondPrimaryText">#727272</color>
+    <color name="dividerColor">#B6B6B6</color>
     <color name="welcome_text_color">#eeeeee</color>
     <color name="welcome_page_bgcolor">#5e8756</color>
     <color name="welcome_appname_color">#836e4b</color>

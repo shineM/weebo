@@ -208,7 +208,8 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
                         mMainActivityPresenter.loadDatas(0, mContext, isFirstIn);
                         break;
                     case R.id.nav_message:
-                        Toast.makeText(getApplicationContext(), "message", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_search:
                         Toast.makeText(getApplicationContext(), "search", Toast.LENGTH_SHORT).show();

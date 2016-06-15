@@ -84,4 +84,20 @@ public class AddWeiboModelImp implements AddWeiboModel {
             }
         });
     }
+
+    @Override
+    public void reply(Context context, String content, Comment comment, Weibo weibo, final OnCommentFinished onCommentFinished) {
+        CommentsAPI api = new CommentsAPI(context,Constants.APP_KEY,AccessTokenKeeper.readAccessToken(context));
+        api.reply(Long.valueOf(comment.id),Long.valueOf(weibo.id),content,false, false, new RequestListener() {
+            @Override
+            public void onComplete(String s) {
+                onCommentFinished.successed(Comment.parse(s));
+            }
+
+            @Override
+            public void onWeiboException(WeiboException e) {
+                onCommentFinished.failed(e.toString());
+            }
+        });
+    }
 }

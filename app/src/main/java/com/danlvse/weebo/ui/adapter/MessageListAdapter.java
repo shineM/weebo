@@ -52,6 +52,10 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         return comments.size();
     }
 
+    public void setDatas(List<Comment> list) {
+        comments = list;
+    }
+
     private static class MessageViewHolder extends RecyclerView.ViewHolder {
         private ImageView avatar;
         private TextView username;

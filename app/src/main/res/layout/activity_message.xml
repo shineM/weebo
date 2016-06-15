@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,14 +8,36 @@
     tools:context="com.danlvse.weebo.ui.MessageActivity">
 
     <include layout="@layout/toolbar"></include>
-
-    <android.support.v4.widget.SwipeRefreshLayout
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/slide_strip"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="48dp"
+        android:background="@color/white"
+        app:pstsIndicatorColor="@color/colorAccent"
+        app:pstsShouldExpand="true"
+        app:pstsIndicatorHeight="5dp"
+        app:pstsDividerColor="@color/dividerColor"
+        app:pstsUnderlineColor="@color/colorAccent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/commemt_list"
+    </com.astuetz.PagerSlidingTabStrip>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/message_viewpager"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/message_pager_strip"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="0dp"></android.support.v4.view.PagerTabStrip>
+    </android.support.v4.view.ViewPager>
+
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:id="@+id/swipe_refresh"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/comment_list"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>-->
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 </LinearLayout>

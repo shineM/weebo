@@ -56,9 +56,13 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
     private static final int REQUEST_CAMERA_CODE = 0;
     private static final int REQUEST_LIBRARY_CODE = 2;
     public static final String ORIGIN_WEIBO = "originWeibo";
-    public static final String IS_REPOST = "isRepost";
+    public static final String ADD_TYPE = "type";
+    public static final int COMMON = 0;
+    public static final int REPOST = 1;
+    public static final int COMMENT = 2;
+    public static final int REPLY = 3;
     public static final String REPOST_CONTENT = "repostContent";
-    public static final String IS_COMMENT = "isComment";
+    public static final String ORIGIN_COMMENT = "originComment";
     private View container;
     private TextView repostText;
     private FrameLayout imageLayout;
@@ -78,8 +82,7 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
     private AddWeiboPresenter presenter;
     private PermissionUtils.PermissionOperation operation;
     private ProgressWheel progressWheel;
-    private Boolean isRepost;
-    private Boolean isComment;
+    private int addType;
     private Comment mComment;
     private String repostContent;
     private String originComment;
@@ -90,8 +93,8 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_weibo);
-        isRepost = getIntent().getBooleanExtra(IS_REPOST, false);
-        isComment = getIntent().getBooleanExtra(IS_COMMENT, false);
+        addType = getIntent().getIntExtra(ADD_TYPE,0);
+        mComment = getIntent().getParcelableExtra(ORIGIN_COMMENT);
         originWeibo = getIntent().getParcelableExtra(ORIGIN_WEIBO);
         repostContent = getIntent().getStringExtra(REPOST_CONTENT);
         presenter = new AddWeiboPresenterImp(this);
@@ -111,24 +114,33 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
     }
 
     private void initPostType() {
-        if (isRepost) {
-            mPostButton.setText("转发");
-            bottomMenu.setVisibility(View.GONE);
-            mInputText.setHint("转发微博");
-            repostText.setText(repostContent);
-            repostText.setVisibility(View.VISIBLE);
-            imageLayout.setVisibility(View.GONE);
-//            mInputText.requestFocus();
-//            InputMethodManager inputMethodManager = (InputMethodManager) mInputText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//            inputMethodManager.toggleSoftInput(0,InputMethodManager.SHOW_FORCED);
-//            mInputText.setSelection(0);
-        } else if (isComment) {
-            mPostButton.setText("评论");
-            bottomMenu.setVisibility(View.GONE);
-            mInputText.setHint("评论微博");
-            repostText.setText(repostContent);
-            repostText.setVisibility(View.VISIBLE);
-            imageLayout.setVisibility(View.GONE);
+        switch (addType){
+            case REPOST:
+                mPostButton.setText("转发");
+                bottomMenu.setVisibility(View.GONE);
+                mInputText.setHint("转发微博");
+                repostText.setText(repostContent);
+                repostText.setVisibility(View.VISIBLE);
+                imageLayout.setVisibility(View.GONE);
+                break;
+            case COMMENT:
+                mPostButton.setText("评论");
+                bottomMenu.setVisibility(View.GONE);
+                mInputText.setHint("评论微博");
+                repostText.setText(repostContent);
+                repostText.setVisibility(View.VISIBLE);
+                imageLayout.setVisibility(View.GONE);
+                break;
+            case REPLY:
+                mPostButton.setText("回复");
+                bottomMenu.setVisibility(View.GONE);
+                mInputText.setHint("回复评论");
+                repostText.setText(repostContent);
+                repostText.setVisibility(View.VISIBLE);
+                imageLayout.setVisibility(View.GONE);
+                break;
+            default:
+                break;
         }
     }
 
@@ -220,26 +232,39 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
         mPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isRepost) {
-                    content = mInputText.getText().toString();
-                    if (TextUtils.isEmpty(content)) {
-                        content = "转发微博";
-                    }
-                    repostWeibo(content);
-                } else if (isComment) {
-                    content = mInputText.getText().toString();
-                    if (TextUtils.isEmpty(content)) {
-                        ToastUtil.showShort(getApplicationContext(), "还是说点什么吧");
-                    } else {
-                        comment(content);
-                    }
-                } else {
-                    content = mInputText.getText().toString();
-                    if (TextUtils.isEmpty(content)) {
-                        ToastUtil.showShort(getApplicationContext(), "还是说点什么吧");
-                    } else {
-                        sendWeibo(content);
-                    }
+                switch (addType){
+                    case REPOST:
+                        content = mInputText.getText().toString();
+                        if (TextUtils.isEmpty(content)) {
+                            content = "转发微博";
+                        }
+                        repostWeibo(content);
+                        break;
+                    case COMMENT:
+                        content = mInputText.getText().toString();
+
+                        if (TextUtils.isEmpty(content)) {
+                            ToastUtil.showShort(getApplicationContext(), "还是说点什么吧");
+                        } else {
+                            comment(content);
+                        }
+                        break;
+                    case REPLY:
+                        content = mInputText.getText().toString();
+                        if (TextUtils.isEmpty(content)) {
+                            ToastUtil.showShort(getApplicationContext(), "还是说点什么吧");
+                        } else {
+                            reply(content);
+                        }
+                        break;
+                    default:
+                        content = mInputText.getText().toString();
+                        if (TextUtils.isEmpty(content)) {
+                            ToastUtil.showShort(getApplicationContext(), "还是说点什么吧");
+                        } else {
+                            sendWeibo(content);
+                        }
+                        break;
                 }
             }
         });
@@ -251,7 +276,9 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
             }
         });
     }
-
+    private void reply(String content) {
+        presenter.reply(this, content,mComment,originWeibo);
+    }
     private void comment(String content) {
         presenter.commentWeibo(this, content,originWeibo);
     }

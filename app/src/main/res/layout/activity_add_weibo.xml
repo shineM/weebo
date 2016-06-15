@@ -43,11 +43,12 @@
         <TextView
             android:id="@+id/repost_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="110dp"
             android:padding="5dp"
+            android:maxLines="6"
             android:background="@color/repost_background"
             android:text="@string/repost_weibo_hint"
-            android:visibility="invisible"/>
+            android:visibility="gone"/>
         <FrameLayout
             android:id="@+id/image_layout"
             android:layout_width="match_parent"

@@ -208,7 +208,7 @@ public class BindViewUtil {
             public void onClick(View v) {
 //                AddWeiboModelImp.repostWeibo(mActivity,weibo,"",0,listener);
                 Intent intent = new Intent(mActivity, AddWeiboActivity.class);
-                intent.putExtra(AddWeiboActivity.IS_REPOST,true);
+                intent.putExtra(AddWeiboActivity.ADD_TYPE,1);
                 intent.putExtra(AddWeiboActivity.REPOST_CONTENT,"//@"+weibo.user.name+":"+weibo.text);
                 intent.putExtra(AddWeiboActivity.ORIGIN_WEIBO,(Parcelable) weibo);
                 mActivity.startActivity(intent);
@@ -218,7 +218,7 @@ public class BindViewUtil {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mActivity, AddWeiboActivity.class);
-                intent.putExtra(AddWeiboActivity.IS_COMMENT,true);
+                intent.putExtra(AddWeiboActivity.ADD_TYPE,2);
                 intent.putExtra(AddWeiboActivity.REPOST_CONTENT,"@"+weibo.user.name+":"+weibo.text);
                 intent.putExtra(AddWeiboActivity.ORIGIN_WEIBO,(Parcelable) weibo);
                 mActivity.startActivity(intent);

@@ -46,6 +46,12 @@ public class AddWeiboPresenterImp implements AddWeiboPresenter {
         addWeiboModel.comment(context,content,weibo,onCommentFinished);
     }
 
+    @Override
+    public void reply(Context context, String content, Comment comment, Weibo weibo) {
+        addWeiboView.showLoadingIcon();
+        addWeiboModel.reply(context, content, comment,weibo,onCommentFinished);
+    }
+
     private AddWeiboModel.OnCommentFinished onCommentFinished = new AddWeiboModel.OnCommentFinished() {
         @Override
         public void successed(Comment comment) {

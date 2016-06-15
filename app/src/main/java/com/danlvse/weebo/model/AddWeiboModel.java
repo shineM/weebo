@@ -33,4 +33,6 @@ public interface AddWeiboModel {
     void repost(Context context, String content, Weibo weibo, OnRepostFinished onRepostFinished);
 
     void comment(Context context, String content, Weibo weibo, OnCommentFinished onCommentFinished);
+
+    void reply(Context context, String content,Comment comment, Weibo weibo, OnCommentFinished onCommentFinished);
 }
