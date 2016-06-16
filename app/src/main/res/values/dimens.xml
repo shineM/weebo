@@ -41,4 +41,5 @@
     <dimen name="actionbar_height">56dp</dimen>
     <dimen name="follower_username_margin_left">200dp</dimen>
     <dimen name="topic_radius">15dp</dimen>
+    <dimen name="content_remainder_text">20sp</dimen>
 </resources>

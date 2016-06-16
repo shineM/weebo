@@ -203,19 +203,24 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
         mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
+                Intent intent;
                 switch (item.getItemId()) {
                     case R.id.nav_home:
                         mMainActivityPresenter.loadDatas(0, mContext, isFirstIn);
                         break;
                     case R.id.nav_message:
-                        Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+                        intent = new Intent(MainActivity.this, MessageActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.nav_search:
-                        Toast.makeText(getApplicationContext(), "search", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(MainActivity.this, SearchActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_setting:
                         Toast.makeText(getApplicationContext(), "全部动态", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_star:
+                        Toast.makeText(getApplicationContext(), "收藏", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_about:
                         Toast.makeText(getApplicationContext(), "全部动态", Toast.LENGTH_SHORT).show();

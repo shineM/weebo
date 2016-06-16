@@ -34,4 +34,7 @@
     <string name="follow_count">关注  78  </string>
     <string name="follow_list">粉丝列表</string>
     <string name="repost_weibo_hint">//@shineMicroxy:啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</string>
+    <string name="nav_star">收藏</string>
+    <string name="search_text">搜索</string>
+    <string name="search_result_empty">没有搜索结果</string>
 </resources>

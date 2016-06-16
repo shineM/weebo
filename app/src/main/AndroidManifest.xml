@@ -68,7 +68,8 @@
         <activity android:name=".ui.TopicActivity" />
         <activity android:name=".ui.FollowersListActivity" />
         <activity android:name=".ui.TrendsActivity" />
-        <activity android:name=".ui.MessageActivity"></activity>
+        <activity android:name=".ui.MessageActivity" />
+        <activity android:name=".ui.SearchActivity"></activity>
     </application>
 
 </manifest>

@@ -206,25 +206,17 @@ public class BindViewUtil {
         repostIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                AddWeiboModelImp.repostWeibo(mActivity,weibo,"",0,listener);
-                Intent intent = new Intent(mActivity, AddWeiboActivity.class);
-                intent.putExtra(AddWeiboActivity.ADD_TYPE,1);
-                intent.putExtra(AddWeiboActivity.REPOST_CONTENT,"//@"+weibo.user.name+":"+weibo.text);
-                intent.putExtra(AddWeiboActivity.ORIGIN_WEIBO,(Parcelable) weibo);
-                mActivity.startActivity(intent);
+                AddWeiboActivity.goToAdd(mActivity, weibo, 1, "//@" + weibo.user.name + ":" + weibo.text);
             }
         });
         commentIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mActivity, AddWeiboActivity.class);
-                intent.putExtra(AddWeiboActivity.ADD_TYPE,2);
-                intent.putExtra(AddWeiboActivity.REPOST_CONTENT,"@"+weibo.user.name+":"+weibo.text);
-                intent.putExtra(AddWeiboActivity.ORIGIN_WEIBO,(Parcelable) weibo);
-                mActivity.startActivity(intent);
+                AddWeiboActivity.goToAdd(mActivity, weibo, 2, "@"+weibo.user.name+":"+weibo.text);
             }
         });
     }
+
 
     /**
      * 绑定用户头像和昵称

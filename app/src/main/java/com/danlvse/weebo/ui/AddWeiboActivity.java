@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -111,6 +113,13 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
         setAnim();
         setUpView();
         initPostType();
+    }
+    public static void goToAdd(Activity mActivity, Weibo weibo, int value, String value2) {
+        Intent intent = new Intent(mActivity, AddWeiboActivity.class);
+        intent.putExtra(AddWeiboActivity.ADD_TYPE, value);
+        intent.putExtra(AddWeiboActivity.REPOST_CONTENT, value2);
+        intent.putExtra(AddWeiboActivity.ORIGIN_WEIBO, (Parcelable) weibo);
+        mActivity.startActivity(intent);
     }
 
     private void initPostType() {

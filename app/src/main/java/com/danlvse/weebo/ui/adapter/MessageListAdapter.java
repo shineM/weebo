@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.danlvse.weebo.R;
 import com.danlvse.weebo.data.Comment;
+import com.danlvse.weebo.ui.AddWeiboActivity;
 import com.danlvse.weebo.utils.OnContentClickListener;
 import com.danlvse.weebo.utils.weibo.BindViewUtil;
 
@@ -37,12 +38,19 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MessageViewHolder viewHolder = (MessageViewHolder) holder;
-        Comment comment = comments.get(position);
+        final Comment comment = comments.get(position);
+        viewHolder.replyIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddWeiboActivity.goToAdd(mActivity,comment.status,AddWeiboActivity.REPLY,comment.user.name+":"+comment.text);
+            }
+        });
+        viewHolder.postTime.setText(BindViewUtil.formatDate(comment.created_at));
         BindViewUtil.bindUser(mActivity, comment.user, viewHolder.avatar, viewHolder.username);
         BindViewUtil.bindContent(viewHolder.content, mActivity, comment.text, new OnContentClickListener() {
             @Override
             public void onTextClick() {
-                //回复评论
+                AddWeiboActivity.goToAdd(mActivity,comment.status,AddWeiboActivity.REPLY,comment.user.name+":"+comment.text);
             }
         });
     }
