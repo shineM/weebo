@@ -15,7 +15,7 @@
         <item name="android:gravity">center</item>
         <item name="android:text">@string/com_sina_weibo_sdk_login_with_weibo_account</item>
     </style><dimen name="com_sina_weibo_sdk_loginview_text_size">16.0sp</dimen><color name="com_sina_weibo_sdk_loginview_text_color">#FFFFFF</color><color name="com_sina_weibo_sdk_blue">#3B5998</color><dimen name="com_sina_weibo_sdk_loginview_compound_drawable_padding">12dp</dimen><style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        
     </style><dimen name="com_sina_weibo_sdk_loginview_padding_top">6dp</dimen><dimen name="com_sina_weibo_sdk_loginview_padding_right">16dp</dimen><dimen name="com_sina_weibo_sdk_loginview_padding_bottom">6dp</dimen><style name="com_sina_weibo_sdk_loginview_silver_style" parent="@android:style/Widget.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -32,9 +32,5 @@
         <item name="android:gravity">center</item>
         <item name="android:text">@string/com_sina_weibo_sdk_login_with_weibo_account</item>
     </style><style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+        
     </style></file><file path="/Users/zxy/Downloads/weebo/WeiboSDK/src/main/res/values-en/strings.xml" qualifiers="en"><string name="com_sina_weibo_sdk_logout">Logout</string><string name="com_sina_weibo_sdk_login_with_weibo_account">Login with Weibo</string><string name="com_sina_weibo_sdk_login">Login</string></file><file path="/Users/zxy/Downloads/weebo/WeiboSDK/src/main/res/values-zh-rTW/strings.xml" qualifiers="zh-rTW"><string name="com_sina_weibo_sdk_login">登錄</string><string name="com_sina_weibo_sdk_login_with_weibo_account">用微博登錄</string><string name="com_sina_weibo_sdk_logout">註銷</string></file></source><source path="/Users/zxy/Downloads/weebo/WeiboSDK/build/generated/res/rs/release"/><source path="/Users/zxy/Downloads/weebo/WeiboSDK/build/generated/res/resValues/release"/></dataSet><dataSet config="release" generated-set="release$Generated"><source path="/Users/zxy/Downloads/weebo/WeiboSDK/src/release/res"/></dataSet><mergedItems/></merger>

@@ -31,7 +31,6 @@ public class SearchModelImp implements SearchModel {
                 }else {
                     onSearchCompleted.onEmpty();
                 }
-
             }
 
             @Override

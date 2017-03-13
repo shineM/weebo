@@ -215,6 +215,7 @@ public class AddWeiboActivity extends AppCompatActivity implements AddWeiboView 
                 PermissionUtils.checkPermission(AddWeiboActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUEST_WRITE_PERMISSION_CODE, operation);
             }
         });
+
         mInputText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
