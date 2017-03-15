@@ -3,9 +3,7 @@ package com.danlvse.weebo.ui.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +15,6 @@ import android.widget.TextView;
 import com.danlvse.weebo.R;
 import com.danlvse.weebo.data.Weibo;
 import com.danlvse.weebo.ui.ImagesDetailActivity;
-import com.danlvse.weebo.ui.MainActivity;
 import com.danlvse.weebo.utils.ActivityUtils;
 import com.danlvse.weebo.utils.weibo.BindViewUtil;
 

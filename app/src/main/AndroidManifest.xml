@@ -30,14 +30,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".activity.main.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.WebViewActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ProfileActivity"
-            android:parentActivityName=".ui.MainActivity"
+            android:parentActivityName=".activity.main.MainActivity"
             android:screenOrientation="portrait" />
 
         <!-- 登录web界面 -->

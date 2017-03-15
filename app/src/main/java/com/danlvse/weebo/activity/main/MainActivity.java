@@ -1,4 +1,4 @@
-package com.danlvse.weebo.ui;
+package com.danlvse.weebo.activity.main;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,9 +32,14 @@ import com.danlvse.weebo.R;
 import com.danlvse.weebo.data.Weibo;
 import com.danlvse.weebo.presenter.MainActivityPresenter;
 import com.danlvse.weebo.presenter.imp.MainActivityPresenterImp;
+import com.danlvse.weebo.ui.AddWeiboActivity;
+import com.danlvse.weebo.ui.BaseActivity;
+import com.danlvse.weebo.ui.MessageActivity;
+import com.danlvse.weebo.ui.ProfileActivity;
+import com.danlvse.weebo.ui.SearchActivity;
+import com.danlvse.weebo.ui.TrendsActivity;
 import com.danlvse.weebo.ui.adapter.TimelineAdapter;
 import com.danlvse.weebo.ui.adapter.WeiboListAdapter;
-import com.danlvse.weebo.utils.ActivityUtils;
 import com.danlvse.weebo.utils.ToastUtil;
 import com.danlvse.weebo.utils.weibo.AccessTokenKeeper;
 import com.danlvse.weebo.ui.view.MainActivityView;

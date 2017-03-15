@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.danlvse.weebo.R;
+import com.danlvse.weebo.activity.main.MainActivity;
 import com.danlvse.weebo.presenter.WebViewPresenter;
 import com.danlvse.weebo.presenter.imp.WebViewPresenterImp;
 import com.danlvse.weebo.utils.Constants;
