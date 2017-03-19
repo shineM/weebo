@@ -1,7 +1,6 @@
 package com.danlvse.weebo.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.User;
+import com.danlvse.weebo.model.User;
 import com.danlvse.weebo.presenter.FollowersListPresenter;
 import com.danlvse.weebo.presenter.imp.FollowerListPresenterImp;
 import com.danlvse.weebo.ui.adapter.UserListAdapter;

@@ -1,15 +1,12 @@
 package com.danlvse.weebo.ui;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.WindowManager;
 
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.utils.Constants;
+import com.danlvse.weebo.activity.main.MainActivity;
 import com.danlvse.weebo.utils.weibo.AccessTokenKeeper;
 
 import java.util.Timer;

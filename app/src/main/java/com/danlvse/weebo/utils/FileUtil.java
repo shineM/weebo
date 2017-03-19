@@ -9,14 +9,13 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.provider.MediaStore;
 
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.Feed;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -161,14 +160,14 @@ public class FileUtil {
             //Toast.makeText(context, "文件写入失败", Toast.LENGTH_SHORT).show();
         }
     }
-    public static ArrayList<Weibo> getCache(Context context, String fileDir, String fileName) {
+    public static ArrayList<Feed> getCache(Context context, String fileDir, String fileName) {
 
         try {
             File file = new File(fileDir, fileName);
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-            ArrayList<Weibo> weibos = (ArrayList<Weibo>) ois.readObject();
+            ArrayList<Feed> feeds = (ArrayList<Feed>) ois.readObject();
             ois.close();
-            return weibos;
+            return feeds;
         } catch (Exception e) {
             e.printStackTrace();
         }

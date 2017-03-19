@@ -2,9 +2,9 @@ package com.danlvse.weebo.presenter.imp;
 
 import android.content.Context;
 
-import com.danlvse.weebo.data.Weibo;
-import com.danlvse.weebo.model.TopicModel;
-import com.danlvse.weebo.model.imp.TopicModelImp;
+import com.danlvse.weebo.model.Feed;
+import com.danlvse.weebo.mvpmodel.TopicModel;
+import com.danlvse.weebo.mvpmodel.imp.TopicModelImp;
 import com.danlvse.weebo.presenter.TopicPresenter;
 import com.danlvse.weebo.ui.view.TopicView;
 
@@ -19,9 +19,9 @@ public class TopicPresenterImp implements TopicPresenter {
     private Context context;
     private TopicModel.OnDataComplete listener = new TopicModel.OnDataComplete() {
         @Override
-        public void onFinished(List<Weibo> weibos) {
+        public void onFinished(List<Feed> feeds) {
             topicView.hideLoadingIcon();
-            topicView.upadteList(weibos);
+            topicView.upadteList(feeds);
         }
 
         @Override

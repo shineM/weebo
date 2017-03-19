@@ -10,15 +10,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.Feed;
 import com.danlvse.weebo.presenter.SearchPresenter;
 import com.danlvse.weebo.presenter.imp.SearchPresenterImp;
 import com.danlvse.weebo.ui.adapter.TimelineAdapter;
 import com.danlvse.weebo.ui.view.SearchView;
 import com.danlvse.weebo.utils.ToastUtil;
 import com.pnikosis.materialishprogress.ProgressWheel;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +28,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     private RecyclerView searchResultList;
     private ProgressWheel loadingIcon;
     private TimelineAdapter adapter;
-    private List<Weibo> weibos = new ArrayList<>();
+    private List<Feed> feeds = new ArrayList<>();
     private TextView emptyRemainder;
     private SearchPresenter presenter;
     private android.support.v7.widget.SearchView searchView;
@@ -50,7 +48,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
     private void initRecyclerView() {
         searchResultList = (RecyclerView) findViewById(R.id.search_result_list);
-        adapter = new TimelineAdapter(this, weibos);
+        adapter = new TimelineAdapter(this, feeds);
         searchResultList.setLayoutManager(new LinearLayoutManager(this));
         searchResultList.setAdapter(adapter);
     }
@@ -110,8 +108,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     }
 
     @Override
-    public void updateResultList(List<Weibo> results) {
-        weibos = results;
+    public void updateResultList(List<Feed> results) {
+        feeds = results;
         adapter.setNewData(results);
     }
 }

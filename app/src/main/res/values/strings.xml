@@ -29,7 +29,7 @@
     <string name="profile_sign">还没有填写您的个人介绍呢</string>
     <string name="about_contact">正在开发中...</string>
     <string name="transiton_avatar">transition_bettween_avatar</string>
-    <string name="transition_weibo_item">weibo item transition</string>
+    <string name="transition_weibo_item">feed item transition</string>
     <string name="transition_weibo_origin_item">origin_transition</string>
     <string name="follow_count">关注  78  </string>
     <string name="follow_list">粉丝列表</string>

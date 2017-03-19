@@ -7,9 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,24 +16,18 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.User;
-import com.danlvse.weebo.data.Weibo;
-import com.danlvse.weebo.model.TokenModel;
-import com.danlvse.weebo.model.imp.TokenModelImp;
+import com.danlvse.weebo.model.User;
+import com.danlvse.weebo.model.Feed;
 import com.danlvse.weebo.presenter.ProfilePresenter;
 import com.danlvse.weebo.presenter.imp.ProfilePresenterImp;
 import com.danlvse.weebo.ui.adapter.TimelineAdapter;
 import com.danlvse.weebo.ui.view.ProfileView;
 import com.danlvse.weebo.utils.ToastUtil;
-import com.danlvse.weebo.utils.weibo.AccessTokenKeeper;
-import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +51,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     private String username;
     private RecyclerView recyclerView;
     private TimelineAdapter adapter;
-    private List<Weibo> weibos = new ArrayList<>();
+    private List<Feed> feeds = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -86,7 +78,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     }
 
     private void initRecyclerView() {
-        adapter = new TimelineAdapter(this, weibos);
+        adapter = new TimelineAdapter(this, feeds);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
@@ -175,9 +167,9 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     }
 
     @Override
-    public void updateWeiboList(List<Weibo> list) {
-        this.weibos = list;
-        adapter.setNewData(weibos);
+    public void updateWeiboList(List<Feed> list) {
+        this.feeds = list;
+        adapter.setNewData(feeds);
     }
 
     @Override

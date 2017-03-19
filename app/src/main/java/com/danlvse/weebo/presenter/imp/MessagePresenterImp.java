@@ -2,9 +2,9 @@ package com.danlvse.weebo.presenter.imp;
 
 import android.content.Context;
 
-import com.danlvse.weebo.data.Comment;
-import com.danlvse.weebo.model.MessageModel;
-import com.danlvse.weebo.model.imp.MessageModelImp;
+import com.danlvse.weebo.model.Comment;
+import com.danlvse.weebo.mvpmodel.MessageModel;
+import com.danlvse.weebo.mvpmodel.imp.MessageModelImp;
 import com.danlvse.weebo.presenter.MessagePresenter;
 import com.danlvse.weebo.ui.view.MessageView;
 

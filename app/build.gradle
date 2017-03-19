@@ -41,5 +41,7 @@ dependencies {
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile 'com.cesards.android:cropimageview:1.0.2.1'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxandroid:1.0.1'
 
 }

@@ -7,14 +7,13 @@ import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Comment;
+import com.danlvse.weebo.model.Comment;
 import com.danlvse.weebo.presenter.MessagePresenter;
 import com.danlvse.weebo.ui.adapter.MessageListAdapter;
 import com.danlvse.weebo.ui.adapter.MessagePagerAdapter;

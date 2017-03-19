@@ -2,8 +2,8 @@ package com.danlvse.weebo.presenter.imp;
 
 import android.content.Context;
 
-import com.danlvse.weebo.model.TokenModel;
-import com.danlvse.weebo.model.imp.TokenModelImp;
+import com.danlvse.weebo.mvpmodel.TokenModel;
+import com.danlvse.weebo.mvpmodel.imp.TokenModelImp;
 import com.danlvse.weebo.presenter.WebViewPresenter;
 import com.danlvse.weebo.ui.view.WebActivityView;
 

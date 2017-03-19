@@ -30,28 +30,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".activity.main.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.WebViewActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ProfileActivity"
-            android:parentActivityName=".ui.MainActivity"
+            android:parentActivityName=".activity.main.MainActivity"
             android:screenOrientation="portrait" />
 
         <!-- 登录web界面 -->
         <activity
-            android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+            android:name="com.sina.feed.sdk.component.WeiboSdkBrowser"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.sina.weibo.sdk.register.mobile.MobileRegisterActivity"
+            android:name="com.sina.feed.sdk.register.mobile.MobileRegisterActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
         <!-- 注册选择国家页面 -->
         <activity
-            android:name="com.sina.weibo.sdk.register.mobile.SelectCountryActivity"
+            android:name="com.sina.feed.sdk.register.mobile.SelectCountryActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
         <activity
@@ -61,7 +61,7 @@
             android:name=".ui.ImagesDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.AddWeiboActivity"
+            android:name=".activity.createfeed.CreateFeedActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentActivity"
             android:windowSoftInputMode="adjustResize" />
