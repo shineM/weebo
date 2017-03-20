@@ -1,1 +1,1 @@
-include ':app',':WeiboSDK'
+include ':app', ':WeiboSDK'
