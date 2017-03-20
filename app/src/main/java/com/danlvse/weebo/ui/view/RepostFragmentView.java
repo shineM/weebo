@@ -1,6 +1,6 @@
 package com.danlvse.weebo.ui.view;
 
-import com.danlvse.weebo.data.Repost;
+import com.danlvse.weebo.model.Repost;
 
 import java.util.List;
 

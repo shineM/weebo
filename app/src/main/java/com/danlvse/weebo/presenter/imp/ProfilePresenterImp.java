@@ -2,10 +2,10 @@ package com.danlvse.weebo.presenter.imp;
 
 import android.content.Context;
 
-import com.danlvse.weebo.data.User;
-import com.danlvse.weebo.data.Weibo;
-import com.danlvse.weebo.model.ProfileModel;
-import com.danlvse.weebo.model.imp.ProfileModelImp;
+import com.danlvse.weebo.model.Feed;
+import com.danlvse.weebo.model.User;
+import com.danlvse.weebo.mvpmodel.ProfileModel;
+import com.danlvse.weebo.mvpmodel.imp.ProfileModelImp;
 import com.danlvse.weebo.presenter.ProfilePresenter;
 import com.danlvse.weebo.ui.view.ProfileView;
 
@@ -31,8 +31,8 @@ public class ProfilePresenterImp implements ProfilePresenter {
     };
     private ProfileModel.OnWeiboListLoaded weiboListLoaded = new ProfileModel.OnWeiboListLoaded() {
         @Override
-        public void onComplete(List<Weibo> weibos) {
-            profileView.updateWeiboList(weibos);
+        public void onComplete(List<Feed> feeds) {
+            profileView.updateWeiboList(feeds);
             profileView.hideLoadingIcon();
         }
 

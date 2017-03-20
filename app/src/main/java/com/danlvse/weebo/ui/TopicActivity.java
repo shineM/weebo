@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.Feed;
 import com.danlvse.weebo.presenter.TopicPresenter;
 import com.danlvse.weebo.presenter.imp.TopicPresenterImp;
 import com.danlvse.weebo.ui.adapter.TimelineAdapter;
@@ -25,7 +25,7 @@ public class TopicActivity extends AppCompatActivity implements TopicView {
     private RecyclerView weiboList;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private TimelineAdapter adapter;
-    private List<Weibo> weibos = new ArrayList<>();
+    private List<Feed> feeds = new ArrayList<>();
     private TopicPresenter presenter;
     private String topicKey;
     private String extra;
@@ -45,7 +45,7 @@ public class TopicActivity extends AppCompatActivity implements TopicView {
 
     private void initRecyclerView() {
         weiboList = (RecyclerView) findViewById(R.id.topic_weibo_list);
-        adapter = new TimelineAdapter(this, weibos);
+        adapter = new TimelineAdapter(this, feeds);
         weiboList.setLayoutManager(new LinearLayoutManager(this));
         weiboList.setAdapter(adapter);
     }
@@ -95,8 +95,8 @@ public class TopicActivity extends AppCompatActivity implements TopicView {
     }
 
     @Override
-    public void upadteList(List<Weibo> list) {
-        weibos = list;
+    public void upadteList(List<Feed> list) {
+        feeds = list;
         adapter.setNewData(list);
     }
 }

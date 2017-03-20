@@ -1,6 +1,5 @@
 package com.danlvse.weebo.ui.adapter;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -13,10 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Comment;
-import com.danlvse.weebo.ui.AddWeiboActivity;
+import com.danlvse.weebo.activity.createfeed.CreateFeedActivity;
+import com.danlvse.weebo.model.Comment;
 import com.danlvse.weebo.utils.OnContentClickListener;
-import com.danlvse.weebo.utils.ToastUtil;
 import com.danlvse.weebo.utils.weibo.BindViewUtil;
 
 import java.util.ArrayList;
@@ -53,11 +51,11 @@ public class CommentListAdapter extends AnimRecyclerViewAdapter<RecyclerView.Vie
         v.content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, AddWeiboActivity.class);
-                intent.putExtra(AddWeiboActivity.ADD_TYPE,3);
-                intent.putExtra(AddWeiboActivity.ORIGIN_COMMENT,comment);
-                intent.putExtra(AddWeiboActivity.REPOST_CONTENT,"@"+comment.user.name+":"+comment.text);
-                intent.putExtra(AddWeiboActivity.ORIGIN_WEIBO,(Parcelable) comment.status);
+                Intent intent = new Intent(mContext, CreateFeedActivity.class);
+                intent.putExtra(CreateFeedActivity.ADD_TYPE,3);
+                intent.putExtra(CreateFeedActivity.ORIGIN_COMMENT,comment);
+                intent.putExtra(CreateFeedActivity.REPOST_CONTENT,"@"+comment.user.name+":"+comment.text);
+                intent.putExtra(CreateFeedActivity.ORIGIN_WEIBO,(Parcelable) comment.status);
                 mContext.startActivity(intent);
             }
         });

@@ -2,9 +2,9 @@ package com.danlvse.weebo.presenter.imp;
 
 import android.content.Context;
 
-import com.danlvse.weebo.data.Weibo;
-import com.danlvse.weebo.model.WeiboListModel;
-import com.danlvse.weebo.model.imp.WeiboListModelImp;
+import com.danlvse.weebo.model.Feed;
+import com.danlvse.weebo.mvpmodel.WeiboListModel;
+import com.danlvse.weebo.mvpmodel.imp.WeiboListModelImp;
 import com.danlvse.weebo.presenter.MainActivityPresenter;
 import com.danlvse.weebo.ui.view.MainActivityView;
 
@@ -56,7 +56,7 @@ public class MainActivityPresenterImp implements MainActivityPresenter {
 
 
         @Override
-        public void onComplete(ArrayList<Weibo> statuslist) {
+        public void onComplete(ArrayList<Feed> statuslist) {
             mainActivityView.hideRefreshIcon();
             mainActivityView.refreshData(statuslist);
 
@@ -76,9 +76,9 @@ public class MainActivityPresenterImp implements MainActivityPresenter {
 
 
         @Override
-        public void onComplete(ArrayList<Weibo> weibos) {
-            System.out.println("--------------------load more count；"+weibos.size());
-            mainActivityView.showMoreData(weibos);
+        public void onComplete(ArrayList<Feed> feeds) {
+            System.out.println("--------------------load more count；"+ feeds.size());
+            mainActivityView.showMoreData(feeds);
         }
 
         @Override

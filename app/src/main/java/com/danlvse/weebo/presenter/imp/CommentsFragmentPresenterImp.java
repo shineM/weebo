@@ -2,10 +2,10 @@ package com.danlvse.weebo.presenter.imp;
 
 import android.content.Context;
 
-import com.danlvse.weebo.data.Comment;
-import com.danlvse.weebo.data.Weibo;
-import com.danlvse.weebo.model.CommentsModel;
-import com.danlvse.weebo.model.imp.CommentsModelImp;
+import com.danlvse.weebo.model.Comment;
+import com.danlvse.weebo.model.Feed;
+import com.danlvse.weebo.mvpmodel.CommentsModel;
+import com.danlvse.weebo.mvpmodel.imp.CommentsModelImp;
 import com.danlvse.weebo.presenter.CommentsFragmentPresenter;
 import com.danlvse.weebo.ui.view.CommentsFragmentView;
 
@@ -26,9 +26,9 @@ public class CommentsFragmentPresenterImp implements CommentsFragmentPresenter {
     }
 
     @Override
-    public void loadComment(Context context, Weibo weibo) {
+    public void loadComment(Context context, Feed feed) {
         mView.showLoadingIcon();
-        commentsModel.getComments(context, weibo, new CommentsModel.OnCommentLoadListener() {
+        commentsModel.getComments(context, feed, new CommentsModel.OnCommentLoadListener() {
             @Override
             public void onDataFinish(ArrayList<Comment> list) {
                 mView.hideLoadingIcon();

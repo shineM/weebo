@@ -3,10 +3,10 @@ package com.danlvse.weebo.presenter.imp;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.danlvse.weebo.data.Comment;
-import com.danlvse.weebo.data.Weibo;
-import com.danlvse.weebo.model.AddWeiboModel;
-import com.danlvse.weebo.model.imp.AddWeiboModelImp;
+import com.danlvse.weebo.model.Comment;
+import com.danlvse.weebo.model.Feed;
+import com.danlvse.weebo.mvpmodel.AddWeiboModel;
+import com.danlvse.weebo.mvpmodel.imp.AddWeiboModelImp;
 import com.danlvse.weebo.presenter.AddWeiboPresenter;
 import com.danlvse.weebo.ui.view.AddWeiboView;
 
@@ -35,21 +35,21 @@ public class AddWeiboPresenterImp implements AddWeiboPresenter {
     }
 
     @Override
-    public void repostWeibo(Context context, String content, Weibo weibo) {
+    public void repostWeibo(Context context, String content, Feed feed) {
         addWeiboView.showLoadingIcon();
-        addWeiboModel.repost(context, content,weibo,onRepostFinished);
+        addWeiboModel.repost(context, content, feed,onRepostFinished);
     }
 
     @Override
-    public void commentWeibo(Context context, String content, Weibo weibo) {
+    public void commentWeibo(Context context, String content, Feed feed) {
         addWeiboView.showLoadingIcon();
-        addWeiboModel.comment(context,content,weibo,onCommentFinished);
+        addWeiboModel.comment(context,content, feed,onCommentFinished);
     }
 
     @Override
-    public void reply(Context context, String content, Comment comment, Weibo weibo) {
+    public void reply(Context context, String content, Comment comment, Feed feed) {
         addWeiboView.showLoadingIcon();
-        addWeiboModel.reply(context, content, comment,weibo,onCommentFinished);
+        addWeiboModel.reply(context, content, comment, feed,onCommentFinished);
     }
 
     private AddWeiboModel.OnCommentFinished onCommentFinished = new AddWeiboModel.OnCommentFinished() {
@@ -67,9 +67,9 @@ public class AddWeiboPresenterImp implements AddWeiboPresenter {
     };
     private AddWeiboModel.OnPostFinished listener = new AddWeiboModel.OnPostFinished() {
         @Override
-        public void successed(Weibo weibo) {
+        public void successed(Feed feed) {
             addWeiboView.hideLoadingIcon();
-            addWeiboView.showSuccessInfo(weibo);
+            addWeiboView.showSuccessInfo(feed);
         }
 
         @Override
@@ -80,9 +80,9 @@ public class AddWeiboPresenterImp implements AddWeiboPresenter {
     };
     private AddWeiboModel.OnRepostFinished onRepostFinished = new AddWeiboModel.OnRepostFinished() {
         @Override
-        public void successed(Weibo weibo) {
+        public void successed(Feed feed) {
             addWeiboView.hideLoadingIcon();
-            addWeiboView.showSuccessInfo(weibo);
+            addWeiboView.showSuccessInfo(feed);
         }
 
         @Override

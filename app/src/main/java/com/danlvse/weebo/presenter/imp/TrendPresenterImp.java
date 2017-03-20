@@ -2,9 +2,9 @@ package com.danlvse.weebo.presenter.imp;
 
 import android.content.Context;
 
-import com.danlvse.weebo.data.Topic;
-import com.danlvse.weebo.model.TrendsModel;
-import com.danlvse.weebo.model.imp.TrendsModelImp;
+import com.danlvse.weebo.model.Topic;
+import com.danlvse.weebo.mvpmodel.TrendsModel;
+import com.danlvse.weebo.mvpmodel.imp.TrendsModelImp;
 import com.danlvse.weebo.presenter.TrendsPresenter;
 import com.danlvse.weebo.ui.view.TrendsView;
 

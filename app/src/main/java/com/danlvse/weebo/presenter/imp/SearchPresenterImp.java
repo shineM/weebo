@@ -2,9 +2,9 @@ package com.danlvse.weebo.presenter.imp;
 
 import android.content.Context;
 
-import com.danlvse.weebo.data.Weibo;
-import com.danlvse.weebo.model.SearchModel;
-import com.danlvse.weebo.model.imp.SearchModelImp;
+import com.danlvse.weebo.model.Feed;
+import com.danlvse.weebo.mvpmodel.SearchModel;
+import com.danlvse.weebo.mvpmodel.imp.SearchModelImp;
 import com.danlvse.weebo.presenter.SearchPresenter;
 import com.danlvse.weebo.ui.view.SearchView;
 
@@ -24,7 +24,7 @@ public class SearchPresenterImp implements SearchPresenter {
 
     private SearchModel.OnSearchCompleted listener = new SearchModel.OnSearchCompleted() {
         @Override
-        public void onSuccess(List<Weibo> list) {
+        public void onSuccess(List<Feed> list) {
             searchView.hideLoadingIcon();
             searchView.updateResultList(list);
         }

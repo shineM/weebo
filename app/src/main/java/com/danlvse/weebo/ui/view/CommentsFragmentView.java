@@ -1,6 +1,6 @@
 package com.danlvse.weebo.ui.view;
 
-import com.danlvse.weebo.data.Comment;
+import com.danlvse.weebo.model.Comment;
 
 import java.util.ArrayList;
 

@@ -19,13 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.Feed;
 import com.danlvse.weebo.ui.adapter.CommentPagerAdapter;
 import com.danlvse.weebo.ui.fragment.CommentFragment;
 import com.danlvse.weebo.ui.fragment.LikeFragment;
 import com.danlvse.weebo.ui.fragment.RepostFragment;
 import com.danlvse.weebo.ui.widget.SlidingTabLayout;
-import com.danlvse.weebo.utils.OnKeyClick;
 import com.danlvse.weebo.utils.OnContentClickListener;
 import com.danlvse.weebo.utils.weibo.BindViewUtil;
 
@@ -35,8 +34,8 @@ import java.util.List;
 public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private SwipeRefreshLayout mRefreshLayout;
 
-    private Weibo mWeibo;
-    private Weibo originWeibo;
+    private Feed mFeed;
+    private Feed originFeed;
     private Toolbar mToolbar;
     private ImageView avatar;
     private TextView username;
@@ -67,7 +66,7 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weibo_detail);
         mContext = this;
-        mWeibo = getIntent().getParcelableExtra("weibo");
+        mFeed = getIntent().getParcelableExtra("weibo");
 
         initToolbar();
         initRefreshLayout();
@@ -106,7 +105,7 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
     private void initCommentPagerView() {
         mFragments = new ArrayList<Fragment>();
         Bundle bundle = new Bundle();
-        bundle.putParcelable("comments", mWeibo);
+        bundle.putParcelable("comments", mFeed);
         commentsFragment = CommentFragment.newInstance(bundle);
 
         repostFragment = new RepostFragment();
@@ -136,32 +135,32 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
         likeCount = (TextView) findViewById(R.id.like_count);
         content = (TextView) findViewById(R.id.weibo_content);
         originWeiboItem = (LinearLayout) findViewById(R.id.origin_weibo);
-        BindViewUtil.setClick(actionTab,mWeibo,WeiboDetailActivity.this);
-        if (mWeibo.retweeted_status == null) {
+        BindViewUtil.setClick(actionTab, mFeed,WeiboDetailActivity.this);
+        if (mFeed.retweeted_status == null) {
             imgList = (RecyclerView) findViewById(R.id.image_list);
 
             originWeiboItem.setVisibility(View.GONE);
-            BindViewUtil.bindHeaderInf(avatar, username, postTime, postDevice, repostCount, commentCount, likeCount, this, mWeibo);
-            BindViewUtil.bindContent(content, this, mWeibo.text, new OnContentClickListener() {
+            BindViewUtil.bindHeaderInf(avatar, username, postTime, postDevice, repostCount, commentCount, likeCount, this, mFeed);
+            BindViewUtil.bindContent(content, this, mFeed.text, new OnContentClickListener() {
                 @Override
                 public void onTextClick() {
                     return;
                 }
             });
-            BindViewUtil.bindImages(this, imgList, mWeibo);
+            BindViewUtil.bindImages(this, imgList, mFeed);
 
 
         } else {
-            BindViewUtil.bindHeaderInf(avatar, username, postTime, postDevice, repostCount, commentCount, likeCount, this, mWeibo);
-            BindViewUtil.bindContent(content, this, mWeibo.text, new OnContentClickListener() {
+            BindViewUtil.bindHeaderInf(avatar, username, postTime, postDevice, repostCount, commentCount, likeCount, this, mFeed);
+            BindViewUtil.bindContent(content, this, mFeed.text, new OnContentClickListener() {
                 @Override
                 public void onTextClick() {
                     return;
                 }
             });
             String originContent = null;
-            if (mWeibo.retweeted_status.user != null) {
-                originContent = "@" + mWeibo.retweeted_status.user.name + " : " + mWeibo.retweeted_status.text;
+            if (mFeed.retweeted_status.user != null) {
+                originContent = "@" + mFeed.retweeted_status.user.name + " : " + mFeed.retweeted_status.text;
             } else {
                 originContent = "抱歉，此微博已被作者删除。";
             }
@@ -171,16 +170,16 @@ public class WeiboDetailActivity extends AppCompatActivity implements ViewPager.
                 @Override
                 public void onTextClick() {
                     Intent intent = new Intent(mContext, WeiboDetailActivity.class);
-                    intent.putExtra("weibo", (Parcelable) mWeibo.retweeted_status);
+                    intent.putExtra("weibo", (Parcelable) mFeed.retweeted_status);
                     mContext.startActivity(intent);
                 }
             });
-            BindViewUtil.bindImages(this, imgList, mWeibo.retweeted_status);
+            BindViewUtil.bindImages(this, imgList, mFeed.retweeted_status);
             originWeiboItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, WeiboDetailActivity.class);
-                    intent.putExtra("weibo", (Parcelable) mWeibo.retweeted_status);
+                    intent.putExtra("weibo", (Parcelable) mFeed.retweeted_status);
                     mContext.startActivity(intent);
                 }
             });

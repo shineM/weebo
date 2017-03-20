@@ -32,12 +32,12 @@ function windowTitle()
 <!-- ======== START OF CLASS DATA ======== -->
 <H2>
 <FONT SIZE="-1">
-com.sina.weibo.sdk.api.share</FONT>
+com.sina.feed.sdk.api.share</FONT>
 <BR>
 类 WeiboShareSDK</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../../../../../resources/inherit.gif" ALT="继承者 "><B>com.sina.weibo.sdk.api.share.WeiboShareSDK</B>
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="继承者 "><B>com.sina.feed.sdk.api.share.WeiboShareSDK</B>
 </PRE>
 <HR>
 <DL>
@@ -45,7 +45,7 @@ java.lang.Object
 </PRE>
 
 <P>
-该类用于创建分享接口 <A HREF="../../../../../../com/sina/weibo/sdk/api/share/IWeiboShareAPI.html" title="com.sina.weibo.sdk.api.share 中的接口"><CODE>IWeiboShareAPI</CODE></A> 实例。
+该类用于创建分享接口 <A HREF="../../../../../../com/sina/feed/sdk/api/share/IWeiboShareAPI.html" title="com.sina.feed.sdk.api.share 中的接口"><CODE>IWeiboShareAPI</CODE></A> 实例。
 <P>
 
 <P>
@@ -68,7 +68,7 @@ java.lang.Object
 <B>构造方法摘要</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../../../../com/sina/weibo/sdk/api/share/WeiboShareSDK.html#WeiboShareSDK()">WeiboShareSDK</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../../../../../com/sina/feed/sdk/api/share/WeiboShareSDK.html#WeiboShareSDK()">WeiboShareSDK</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -85,8 +85,8 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../../../../com/sina/weibo/sdk/api/share/IWeiboShareAPI.html" title="com.sina.weibo.sdk.api.share 中的接口">IWeiboShareAPI</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../com/sina/weibo/sdk/api/share/WeiboShareSDK.html#createWeiboAPI(Context, java.lang.String)">createWeiboAPI</A></B>(Context&nbsp;context,
+<CODE>static&nbsp;<A HREF="../../../../../../com/sina/feed/sdk/api/share/IWeiboShareAPI.html" title="com.sina.feed.sdk.api.share 中的接口">IWeiboShareAPI</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/sina/feed/sdk/api/share/WeiboShareSDK.html#createWeiboAPI(Context, java.lang.String)">createWeiboAPI</A></B>(Context&nbsp;context,
                java.lang.String&nbsp;appKey)</CODE>
 
 <BR>
@@ -94,8 +94,8 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../../../../com/sina/weibo/sdk/api/share/IWeiboShareAPI.html" title="com.sina.weibo.sdk.api.share 中的接口">IWeiboShareAPI</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../com/sina/weibo/sdk/api/share/WeiboShareSDK.html#createWeiboAPI(Context, java.lang.String, boolean)">createWeiboAPI</A></B>(Context&nbsp;context,
+<CODE>static&nbsp;<A HREF="../../../../../../com/sina/feed/sdk/api/share/IWeiboShareAPI.html" title="com.sina.feed.sdk.api.share 中的接口">IWeiboShareAPI</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/sina/feed/sdk/api/share/WeiboShareSDK.html#createWeiboAPI(Context, java.lang.String, boolean)">createWeiboAPI</A></B>(Context&nbsp;context,
                java.lang.String&nbsp;appKey,
                boolean&nbsp;isDownloadWeibo)</CODE>
 
@@ -145,7 +145,7 @@ public <B>WeiboShareSDK</B>()</PRE>
 <A NAME="createWeiboAPI(Context, java.lang.String, boolean)"><!-- --></A><H3>
 createWeiboAPI</H3>
 <PRE>
-public static <A HREF="../../../../../../com/sina/weibo/sdk/api/share/IWeiboShareAPI.html" title="com.sina.weibo.sdk.api.share 中的接口">IWeiboShareAPI</A> <B>createWeiboAPI</B>(Context&nbsp;context,
+public static <A HREF="../../../../../../com/sina/feed/sdk/api/share/IWeiboShareAPI.html" title="com.sina.feed.sdk.api.share 中的接口">IWeiboShareAPI</A> <B>createWeiboAPI</B>(Context&nbsp;context,
                                             java.lang.String&nbsp;appKey,
                                             boolean&nbsp;isDownloadWeibo)</PRE>
 <DL>
@@ -161,11 +161,11 @@ public static <A HREF="../../../../../../com/sina/weibo/sdk/api/share/IWeiboShar
 <A NAME="createWeiboAPI(Context, java.lang.String)"><!-- --></A><H3>
 createWeiboAPI</H3>
 <PRE>
-public static <A HREF="../../../../../../com/sina/weibo/sdk/api/share/IWeiboShareAPI.html" title="com.sina.weibo.sdk.api.share 中的接口">IWeiboShareAPI</A> <B>createWeiboAPI</B>(Context&nbsp;context,
+public static <A HREF="../../../../../../com/sina/feed/sdk/api/share/IWeiboShareAPI.html" title="com.sina.feed.sdk.api.share 中的接口">IWeiboShareAPI</A> <B>createWeiboAPI</B>(Context&nbsp;context,
                                             java.lang.String&nbsp;appKey)</PRE>
 <DL>
-<DD>创建微博接口实例。如果当前系统没有安装微博，则会在注册 <A HREF="../../../../../../com/sina/weibo/sdk/api/share/IWeiboShareAPI.html#registerApp()"><CODE>IWeiboShareAPI.registerApp()</CODE></A>
- 和分享 <A HREF="../../../../../../com/sina/weibo/sdk/api/share/IWeiboShareAPI.html#sendRequest(Activity, com.sina.weibo.sdk.api.share.BaseRequest)"><CODE>IWeiboShareAPI.sendRequest(Activity, com.sina.weibo.sdk.api.share.BaseRequest)</CODE></A> 时，提示用户下载微博。
+<DD>创建微博接口实例。如果当前系统没有安装微博，则会在注册 <A HREF="../../../../../../com/sina/feed/sdk/api/share/IWeiboShareAPI.html#registerApp()"><CODE>IWeiboShareAPI.registerApp()</CODE></A>
+ 和分享 <A HREF="../../../../../../com/sina/feed/sdk/api/share/IWeiboShareAPI.html#sendRequest(Activity, com.sina.feed.sdk.api.share.BaseRequest)"><CODE>IWeiboShareAPI.sendRequest(Activity, com.sina.feed.sdk.api.share.BaseRequest)</CODE></A> 时，提示用户下载微博。
 <P>
 <DD><DL>
 <DT><B>参数：</B><DD><CODE>context</CODE> - 应用程序上下文环境<DD><CODE>appKey</CODE> - 第三方应用的 APP_KEY

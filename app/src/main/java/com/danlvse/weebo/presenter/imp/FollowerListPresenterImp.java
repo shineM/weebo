@@ -2,9 +2,9 @@ package com.danlvse.weebo.presenter.imp;
 
 import android.content.Context;
 
-import com.danlvse.weebo.data.User;
-import com.danlvse.weebo.model.FollowersModel;
-import com.danlvse.weebo.model.imp.FollowersModelImp;
+import com.danlvse.weebo.model.User;
+import com.danlvse.weebo.mvpmodel.FollowersModel;
+import com.danlvse.weebo.mvpmodel.imp.FollowersModelImp;
 import com.danlvse.weebo.presenter.FollowersListPresenter;
 import com.danlvse.weebo.ui.view.FollowersView;
 

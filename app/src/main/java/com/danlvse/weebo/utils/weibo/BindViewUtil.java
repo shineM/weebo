@@ -19,11 +19,11 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Comment;
-import com.danlvse.weebo.data.User;
-import com.danlvse.weebo.data.Weibo;
-import com.danlvse.weebo.model.AddWeiboModel;
-import com.danlvse.weebo.ui.AddWeiboActivity;
+import com.danlvse.weebo.activity.createfeed.CreateFeedActivity;
+import com.danlvse.weebo.model.Comment;
+import com.danlvse.weebo.model.User;
+import com.danlvse.weebo.model.Feed;
+import com.danlvse.weebo.mvpmodel.AddWeiboModel;
 import com.danlvse.weebo.ui.ProfileActivity;
 import com.danlvse.weebo.ui.TopicActivity;
 import com.danlvse.weebo.ui.adapter.ImageListAdapter;
@@ -61,32 +61,32 @@ public class BindViewUtil {
         }
 
     };
-    public static void bindHeaderInf(ImageView avatar, TextView username, TextView postTime, TextView postDevice, TextView repostCount, TextView commentCount, TextView likeCount, final Activity activity,final Weibo weibo) {
-        Glide.with(activity).load(weibo.user.avatar_large).bitmapTransform(new CropCircleTransformation(activity)).placeholder(R.mipmap.ic_person_white_24dp).into(avatar);
+    public static void bindHeaderInf(ImageView avatar, TextView username, TextView postTime, TextView postDevice, TextView repostCount, TextView commentCount, TextView likeCount, final Activity activity,final Feed feed) {
+        Glide.with(activity).load(feed.user.avatar_large).bitmapTransform(new CropCircleTransformation(activity)).placeholder(R.mipmap.ic_person_white_24dp).into(avatar);
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO add shareElements transition
                 Intent intent = new Intent(activity, ProfileActivity.class);
-                intent.putExtra("users",(Parcelable) weibo.user);
+                intent.putExtra("users",(Parcelable) feed.user);
                 activity.startActivity(intent);
             }
         });
-        username.setText(weibo.user.name);
+        username.setText(feed.user.name);
         username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO add shareElements transition
                 Intent intent = new Intent(activity, ProfileActivity.class);
-                intent.putExtra("users",(Parcelable) weibo.user);
+                intent.putExtra("users",(Parcelable) feed.user);
                 activity.startActivity(intent);
             }
         });
-        postTime.setText(formatDate(weibo.created_at));
-        postDevice.setText(weibo.source);
-        commentCount.setText(weibo.comments_count + "");
-        likeCount.setText(weibo.attitudes_count + "");
-        repostCount.setText(weibo.reposts_count + "");
+        postTime.setText(formatDate(feed.created_at));
+        postDevice.setText(feed.source);
+        commentCount.setText(feed.comments_count + "");
+        likeCount.setText(feed.attitudes_count + "");
+        repostCount.setText(feed.reposts_count + "");
 
     }
 
@@ -107,15 +107,15 @@ public class BindViewUtil {
         content.setText(WeiboContentKeyUtil.getWeiBoContent(text, activity, content, listener,onKeyClick));
     }
 
-    public static void bindImages(Activity mContext, RecyclerView imgList, Weibo weibo) {
+    public static void bindImages(Activity mContext, RecyclerView imgList, Feed feed) {
         imgList.setVisibility(View.GONE);
         imgList.setVisibility(View.VISIBLE);
-        ArrayList<String> origin_pic_urls = weibo.origin_pic_urls;
+        ArrayList<String> origin_pic_urls = feed.origin_pic_urls;
         if (origin_pic_urls == null || origin_pic_urls.size() == 0) {
             imgList.setVisibility(View.GONE);
         } else {
             GridLayoutManager gridLayoutManager = initGridLayoutManager(origin_pic_urls, mContext);
-            ImageListAdapter adapter = new ImageListAdapter(weibo, origin_pic_urls, mContext);
+            ImageListAdapter adapter = new ImageListAdapter(feed, origin_pic_urls, mContext);
             imgList.setLayoutManager(gridLayoutManager);
             imgList.setAdapter(adapter);
             adapter.setData(origin_pic_urls);
@@ -188,13 +188,13 @@ public class BindViewUtil {
 
     }
 
-    public static void setClick(View actionTab, final Weibo weibo, final Activity mActivity) {
+    public static void setClick(View actionTab, final Feed feed, final Activity mActivity) {
         ImageView repostIcon = (ImageView) actionTab.findViewById(R.id.repost_icon);
         ImageView commentIcon = (ImageView) actionTab.findViewById(R.id.comment_icon);
         TextView repostCount = (TextView) actionTab.findViewById(R.id.repost_count);
         final AddWeiboModel.OnRepostFinished listener = new AddWeiboModel.OnRepostFinished() {
             @Override
-            public void successed(Weibo weibo) {
+            public void successed(Feed weibo) {
 
             }
 
@@ -206,13 +206,13 @@ public class BindViewUtil {
         repostIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddWeiboActivity.goToAdd(mActivity, weibo, 1, "//@" + weibo.user.name + ":" + weibo.text);
+                CreateFeedActivity.goToAdd(mActivity, feed, 1, "//@" + feed.user.name + ":" + feed.text);
             }
         });
         commentIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddWeiboActivity.goToAdd(mActivity, weibo, 2, "@"+weibo.user.name+":"+weibo.text);
+                CreateFeedActivity.goToAdd(mActivity, feed, 2, "@"+ feed.user.name+":"+ feed.text);
             }
         });
     }

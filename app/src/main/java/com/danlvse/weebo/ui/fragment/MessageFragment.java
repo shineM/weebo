@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Comment;
+import com.danlvse.weebo.model.Comment;
 import com.danlvse.weebo.presenter.MessagePresenter;
 import com.danlvse.weebo.presenter.imp.MessagePresenterImp;
 import com.danlvse.weebo.ui.adapter.MessageListAdapter;

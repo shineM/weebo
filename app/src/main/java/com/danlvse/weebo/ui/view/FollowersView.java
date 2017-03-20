@@ -1,6 +1,6 @@
 package com.danlvse.weebo.ui.view;
 
-import com.danlvse.weebo.data.User;
+import com.danlvse.weebo.model.User;
 
 import java.util.List;
 

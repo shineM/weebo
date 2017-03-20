@@ -1,6 +1,6 @@
 package com.danlvse.weebo.ui.view;
 
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.Feed;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface TopicView {
 
     void showErrorInfo(String s);
 
-    void upadteList(List<Weibo> weibos);
+    void upadteList(List<Feed> feeds);
 }

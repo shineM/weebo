@@ -1,6 +1,6 @@
 package com.danlvse.weebo.ui.view;
 
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.Feed;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ import java.util.List;
  * Created by zxy on 16/5/24.
  */
 public interface MainActivityView {
-    void refreshData(List<Weibo> weibos);
+    void refreshData(List<Feed> feeds);
 
     void hideRefreshIcon();
 
     void showRefreshIcon();
 
-    void showMoreData(List<Weibo> weibos);
+    void showMoreData(List<Feed> feeds);
 
     void remainMoreData();
 

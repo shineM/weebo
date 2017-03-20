@@ -1,6 +1,6 @@
 package com.danlvse.weebo.ui.view;
 
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.Feed;
 
 import java.util.List;
 
@@ -16,5 +16,5 @@ public interface SearchView {
 
     void showErrorInfo();
 
-    void updateResultList(List<Weibo> results);
+    void updateResultList(List<Feed> results);
 }

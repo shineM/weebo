@@ -1,17 +1,12 @@
 package com.danlvse.weebo.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.os.Build;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -20,11 +15,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.Feed;
 import com.danlvse.weebo.utils.ToastUtil;
 import com.danlvse.weebo.utils.weibo.BindViewUtil;
 import com.pnikosis.materialishprogress.ProgressWheel;
@@ -41,7 +35,7 @@ public class ImagesDetailActivity extends AppCompatActivity {
     private ProgressWheel mProgressIcon;
     private String url;
     private Context mContext;
-    private Weibo mWeibo;
+    private Feed mFeed;
     private ImageView avatar;
     private TextView username;
     private TextView time;
@@ -57,7 +51,7 @@ public class ImagesDetailActivity extends AppCompatActivity {
         mContext = this;
         url = getIntent().getStringExtra(PIC_IMAGE);
 
-        mWeibo = (Weibo) getIntent().getBundleExtra("bundle").get("weibo");
+        mFeed = (Feed) getIntent().getBundleExtra("bundle").get("weibo");
         initToolbar();
         loadImage();
         setUpOnClick();
@@ -71,10 +65,10 @@ public class ImagesDetailActivity extends AppCompatActivity {
         likeCount = (TextView) findViewById(R.id.like_count);
         addLike = (ImageView) findViewById(R.id.add_like);
         mBottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
-        Glide.with(mContext).load(mWeibo.user.avatar_large).bitmapTransform(new CropCircleTransformation(mContext)).into(avatar);
-        username.setText(mWeibo.user.name);
-        time.setText(BindViewUtil.formatDate(mWeibo.created_at));
-        currentCount = mWeibo.attitudes_count;
+        Glide.with(mContext).load(mFeed.user.avatar_large).bitmapTransform(new CropCircleTransformation(mContext)).into(avatar);
+        username.setText(mFeed.user.name);
+        time.setText(BindViewUtil.formatDate(mFeed.created_at));
+        currentCount = mFeed.attitudes_count;
         likeCount.setText(currentCount + "");
         addLike.setOnClickListener(new View.OnClickListener() {
             @Override

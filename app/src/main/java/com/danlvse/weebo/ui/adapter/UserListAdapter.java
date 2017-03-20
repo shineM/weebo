@@ -1,7 +1,6 @@
 package com.danlvse.weebo.ui.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.User;
+import com.danlvse.weebo.model.User;
 import com.danlvse.weebo.ui.ProfileActivity;
 
 import java.util.List;

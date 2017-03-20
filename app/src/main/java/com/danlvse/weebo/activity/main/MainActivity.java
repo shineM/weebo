@@ -29,10 +29,10 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.activity.createfeed.CreateFeedActivity;
+import com.danlvse.weebo.model.Feed;
 import com.danlvse.weebo.presenter.MainActivityPresenter;
 import com.danlvse.weebo.presenter.imp.MainActivityPresenterImp;
-import com.danlvse.weebo.ui.AddWeiboActivity;
 import com.danlvse.weebo.ui.BaseActivity;
 import com.danlvse.weebo.ui.MessageActivity;
 import com.danlvse.weebo.ui.ProfileActivity;
@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
     private View profileView;
     private Handler mHander;
     private RecyclerView mRecyclerView;
-    private List<Weibo> mWeibos;
+    private List<Feed> mFeeds;
     private WeiboListAdapter mAapter;
     //重构了Adapter，支持上拉加载更多
     private TimelineAdapter newAdapter;
@@ -116,9 +116,9 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
     }
 
     private void initRecyclerView() {
-        mWeibos = new ArrayList<Weibo>();
-//        mAapter = new WeiboListAdapter(mWeibos, this);
-        newAdapter = new TimelineAdapter(this, mWeibos);
+        mFeeds = new ArrayList<Feed>();
+//        mAapter = new WeiboListAdapter(mFeeds, this);
+        newAdapter = new TimelineAdapter(this, mFeeds);
         newAdapter.setOnLoadMoreListener(this);
         newAdapter.openLoadMore(4, true);
         newAdapter.setLoadingView(LayoutInflater.from(mContext).inflate(R.layout.view_more_progress, null));
@@ -157,7 +157,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId()==R.id.new_weibo){
-            Intent intent = new Intent(MainActivity.this,AddWeiboActivity.class);
+            Intent intent = new Intent(MainActivity.this,CreateFeedActivity.class);
             startActivity(intent);
         }else if (item.getItemId()==R.id.hot){
             Intent intent = new Intent(MainActivity.this,TrendsActivity.class);
@@ -291,10 +291,10 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
 
     //刷新列表
     @Override
-    public void refreshData(List<Weibo> weibos) {
-        System.out.println("-------------微博数量：" + weibos.size());
-        mWeibos = weibos;
-        newAdapter.setNewData(mWeibos);
+    public void refreshData(List<Feed> feeds) {
+        System.out.println("-------------微博数量：" + feeds.size());
+        mFeeds = feeds;
+        newAdapter.setNewData(mFeeds);
     }
 
     @Override
@@ -312,10 +312,10 @@ public class MainActivity extends BaseActivity implements MainActivityView, Base
     }
 
     @Override
-    public void showMoreData(List<Weibo> weibos) {
-        System.out.println("-------------新增微博数量：" + weibos.size());
-        newAdapter.notifyDataChangedAfterLoadMore(weibos, true);
-        int newCount = weibos.size();
+    public void showMoreData(List<Feed> feeds) {
+        System.out.println("-------------新增微博数量：" + feeds.size());
+        newAdapter.notifyDataChangedAfterLoadMore(feeds, true);
+        int newCount = feeds.size();
         int lastIndex = newAdapter.getItemCount() - 2;
         for (int i = 0; i < newCount; i++) {
             newAdapter.remove(lastIndex);

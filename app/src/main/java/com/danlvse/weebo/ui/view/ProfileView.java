@@ -1,7 +1,7 @@
 package com.danlvse.weebo.ui.view;
 
-import com.danlvse.weebo.data.User;
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.Feed;
+import com.danlvse.weebo.model.User;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ProfileView {
     void bindProfile(User user);
-    void updateWeiboList(List<Weibo> weibos);
+    void updateWeiboList(List<Feed> feeds);
     void showErrorInfo();
     void showLoadingIcon();
     void hideLoadingIcon();

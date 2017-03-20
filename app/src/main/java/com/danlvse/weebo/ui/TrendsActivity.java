@@ -4,13 +4,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Topic;
+import com.danlvse.weebo.model.Topic;
 import com.danlvse.weebo.presenter.TrendsPresenter;
 import com.danlvse.weebo.presenter.imp.TrendPresenterImp;
 import com.danlvse.weebo.ui.adapter.TrendsAdapter;

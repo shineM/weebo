@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Comment;
-import com.danlvse.weebo.data.Weibo;
+import com.danlvse.weebo.model.Comment;
+import com.danlvse.weebo.model.Feed;
 import com.danlvse.weebo.presenter.CommentsFragmentPresenter;
 import com.danlvse.weebo.presenter.imp.CommentsFragmentPresenterImp;
 import com.danlvse.weebo.ui.adapter.CommentListAdapter;
@@ -31,7 +31,7 @@ public class CommentFragment extends Fragment implements CommentsFragmentView {
 
     private SlidingTabLayout mTabLayout;
     private LinearLayout emptyComment;
-    private Weibo weibo;
+    private Feed feed;
     private RecyclerView mRecyclerview;
     private Context mContext;
     private CommentsFragmentPresenter presenter;
@@ -52,14 +52,14 @@ public class CommentFragment extends Fragment implements CommentsFragmentView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_empty_comment, container, false);
-        weibo = getArguments().getParcelable("comments");
+        feed = getArguments().getParcelable("comments");
         mContext = getActivity();
         mRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_refresh);
         mTabLayout = (SlidingTabLayout) getActivity().findViewById(R.id.sliding_tabs);
         presenter = new CommentsFragmentPresenterImp(this, mContext);
 
         initRecyclerView(view);
-        presenter.loadComment(mContext, weibo);
+        presenter.loadComment(mContext, feed);
         return view;
     }
 
@@ -85,7 +85,7 @@ public class CommentFragment extends Fragment implements CommentsFragmentView {
 
     public void refreshData(OnDataRefresh onDataRefresh) {
         this.onDataRefresh = onDataRefresh;
-        presenter.loadComment(mContext, weibo);
+        presenter.loadComment(mContext, feed);
     }
 
     @Override

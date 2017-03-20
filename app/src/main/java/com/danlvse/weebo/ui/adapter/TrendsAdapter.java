@@ -3,14 +3,13 @@ package com.danlvse.weebo.ui.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.danlvse.weebo.R;
-import com.danlvse.weebo.data.Topic;
+import com.danlvse.weebo.model.Topic;
 import com.danlvse.weebo.ui.TopicActivity;
 
 import java.util.List;

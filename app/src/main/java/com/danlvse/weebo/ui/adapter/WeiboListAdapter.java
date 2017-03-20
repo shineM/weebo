@@ -6,11 +6,11 @@ package com.danlvse.weebo.ui.adapter;
 public class WeiboListAdapter {
 //    private static final int TYPE_ORINAL = 0;
 //    private static final int TYPE_REPOST = 1;
-//    private List<Weibo> mWeibos;
+//    private List<Feed> mWeibos;
 //    private Context mContext;
 //    private View mView;
 //
-//    public WeiboListAdapter(List<Weibo> mWeibos, Context context) {
+//    public WeiboListAdapter(List<Feed> mWeibos, Context context) {
 //        this.mWeibos = mWeibos;
 //        this.mContext = context;
 //
@@ -40,7 +40,7 @@ public class WeiboListAdapter {
 //
 //    @Override
 //    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//        final Weibo weibo = mWeibos.get(position);
+//        final Feed weibo = mWeibos.get(position);
 //        System.out.println("position:" + position + "imageList:" + weibo.origin_pic_urls);
 //        //原创微博
 //        if (holder instanceof WeiboViewHolder) {
@@ -100,7 +100,7 @@ public class WeiboListAdapter {
 //        }
 //    }
 //
-//    private void viewDetail(Weibo weibo) {
+//    private void viewDetail(Feed weibo) {
 //        Intent intent = new Intent(mContext, WeiboDetailActivity.class);
 //
 //            intent.putExtra("weibo", (Parcelable) weibo);
@@ -113,7 +113,7 @@ public class WeiboListAdapter {
 //        return mWeibos.size();
 //    }
 //
-//    public void setWeibos(List<Weibo> weibos) {
+//    public void setWeibos(List<Feed> weibos) {
 //        this.mWeibos = weibos;
 //    }
 //

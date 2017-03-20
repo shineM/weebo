@@ -2,7 +2,7 @@ package com.danlvse.weebo.utils.weibo;
 
 import android.text.TextUtils;
 
-import com.danlvse.weebo.data.Comment;
+import com.danlvse.weebo.model.Comment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
